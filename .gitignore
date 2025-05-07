@@ -34,3 +34,7 @@ ngrok.exe
 .env.development
 .env.production
 .csscomb.json
+
+# React Router
+/.react-router/
+/build/
