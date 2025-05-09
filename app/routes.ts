@@ -2,5 +2,6 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
     index("routes/home.tsx"),
-    route("search/:type/:query/:page", "routes/search.tsx") // Dynamic Search Route
+    route("search/:type/:query/:page", "routes/search.tsx"),
+    route("details/:type/:id", "routes/details.tsx")
 ] satisfies RouteConfig;

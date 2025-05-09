@@ -97,7 +97,7 @@ radios {
         label {
             font-family: 'Poppins';
             font-size: 18px;
-            font-weight: 500;
+            font-weight: 600;
 
             height: 50px;
             margin-top: 4px;
@@ -105,7 +105,7 @@ radios {
 
             letter-spacing: 1px;
 
-            color: #fff;
+            color: #000;
         }
 
         input {
@@ -132,4 +132,10 @@ radios {
             }
         }
     }
+}
+
+main {
+    overflow: hidden;
+
+    height: calc(100% - 77px);
 }

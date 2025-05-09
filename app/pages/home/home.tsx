@@ -1,6 +1,6 @@
 
 /* SCSS */
-import './home.scss'
+import './style.scss'
 
 /* Components */
 import LinesBG from 'app/components/LinesBG/LinesBG';

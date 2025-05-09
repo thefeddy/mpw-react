@@ -1,3 +1,11 @@
+/* SCSS */
+import './scss/app.scss';
+
+/* Components */
+import Header from './components/Header/Header';
+
+/* React */
+import type { Route } from "./+types/root";
 import {
     isRouteErrorResponse,
     Links,
@@ -7,8 +15,7 @@ import {
     ScrollRestoration,
 } from "react-router";
 
-import type { Route } from "./+types/root";
-import "./scss/app.scss";
+
 
 export const links: Route.LinksFunction = () => [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -54,6 +61,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Links />
             </head>
             <body>
+                <Header />
                 {children}
                 <ScrollRestoration />
                 <Scripts />

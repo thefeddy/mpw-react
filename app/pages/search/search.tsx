@@ -1,29 +1,33 @@
 /* SCSS */
-import './search.scss'
+import './style.scss'
 
 /* Components */
-import LinesBG from 'app/components/LinesBG/LinesBG';
+import LinesBG from '~/components/LinesBG/LinesBG';
+import Poster from '~/components/Poster/Poster';
 
 /* Services */
-import api from '../../services/api';
+import api from '~/services/api';
+
+/* Interfaces */
+import type { SearchScreenProps, Item } from '~/interfaces/SearchScreen.interface';
 
 /* React */
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export function SearchScreen() {
-    const { type, query, page } = useParams() as { type: string; query: string; page: string };
-    const pageNumber = parseInt(page, 10);
-    const [results, setResults] = useState([]);
+
+export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page }) => {
+    const pageNumber = parseInt(page, 10) || 1;
+    const [results, setResults] = useState<Item[]>([]);
+    const [totalResults, setTotalResults] = useState(0);
 
     useEffect(() => {
-        console.log(type, query, page);
-
         const fetchResults = async () => {
             try {
                 const data = await api.searchTV(type, query, pageNumber);
                 if (data && data.results) {
                     setResults(data.results.results);
+                    setTotalResults(data.results.total_results);
                 }
             } catch (error) {
                 console.error("Error fetching results:", error);
@@ -36,17 +40,26 @@ export function SearchScreen() {
     return (
         <main>
             <LinesBG />
-            <div className="results">
-                {results.length > 0 ? (
-                    results.map((item, index) => (
-                        <div key={index} className="result-item">
-                            {item?.name || item?.title}
-                        </div>
-                    ))
-                ) : (
-                    <p>No results found</p>
-                )}
-            </div>
+            <section>
+                <h1>Search results for: <strong>{query}</strong></h1>
+                <h2>Total Results: <strong>{totalResults}</strong></h2>
+
+                <div className="list">
+                    {results.length > 0 ? (
+                        results.map((item) => (
+                            <Link key={item.id} to={`/details/${type}/${item.id}`}>
+                                <Poster data={item} />
+                            </Link>
+                        ))
+                    ) : (
+                        <p>No results found</p>
+                    )}
+                </div>
+
+                <div className="pagination">
+                    {/* Optional: Implement pagination buttons here */}
+                </div>
+            </section>
         </main>
     );
 }
