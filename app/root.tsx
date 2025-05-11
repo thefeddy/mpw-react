@@ -2,10 +2,19 @@
 import './scss/app.scss';
 
 /* Components */
+import LinesBG from '~/components/LinesBG/LinesBG';
+
+/* Components */
 import Header from './components/Header/Header';
+
+/* Utils */
+import { errorQuotes } from '~/utils/quotes';
 
 /* React */
 import type { Route } from "./+types/root";
+
+import { useEffect, useState } from 'react';
+
 import {
     isRouteErrorResponse,
     Links,
@@ -14,6 +23,7 @@ import {
     Scripts,
     ScrollRestoration,
 } from "react-router";
+
 
 
 
@@ -29,6 +39,8 @@ export const links: Route.LinksFunction = () => [
         href: "https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&display=swap",
     },
 ];
+
+
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -79,11 +91,18 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     let details = "An unexpected error occurred.";
     let stack: string | undefined;
 
+    const [randomQuote, setRandomQuote] = useState(Object.values(errorQuotes)[0]);
+
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * Object.keys(errorQuotes).length);
+        setRandomQuote(Object.values(errorQuotes)[randomIndex]);
+    }, []);
+
     if (isRouteErrorResponse(error)) {
         message = error.status === 404 ? "404" : "Error";
         details =
             error.status === 404
-                ? "The requested page could not be found."
+                ? "Uh, excuse me, what are ya doing here?!"
                 : error.statusText || details;
     } else if (import.meta.env.DEV && error && error instanceof Error) {
         details = error.message;
@@ -91,11 +110,19 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     }
 
     return (
-        <main className="pt-16 p-4 container mx-auto">
+        <main id="four-oh-four">
+            <LinesBG />
+
+            <img src="/img/mpw.png" />
             <h1>{message}</h1>
-            <p>{details}</p>
+
+            <blockquote className="error-quote">
+                <p>"{randomQuote.quote}"</p>
+                <footer>— {randomQuote.description}</footer>
+            </blockquote>
+
             {stack && (
-                <pre className="w-full p-4 overflow-x-auto">
+                <pre>
                     <code>{stack}</code>
                 </pre>
             )}

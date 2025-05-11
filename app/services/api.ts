@@ -22,7 +22,7 @@ const api = {
     },
     async getGenres(): Promise<any> {
         try {
-            const res = await fetch(`${API_URL}/genres/`, {
+            const res = await fetch(`${API_URL}/movies/genres/`, {
                 method: 'GET',
                 headers: headers
             });
@@ -37,6 +37,20 @@ const api = {
     async getDetails(type: string, id: string): Promise<any> {
         try {
             const res = await fetch(`${API_URL}/movies/details/${type}/${id}/`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.error('API error in genres:', err);
+            return null;
+        }
+    },
+    async getTrending(): Promise<any> {
+        try {
+            const res = await fetch(`${API_URL}/movies/trending/`, {
                 method: 'GET',
                 headers: headers
             });

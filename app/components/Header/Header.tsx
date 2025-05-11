@@ -3,7 +3,7 @@ import './Header.scss'
 
 /* Libs */
 import type { JSX } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
     return (
@@ -12,13 +12,13 @@ export default function Header(): JSX.Element {
                 <nav>
                     <ul>
                         <li>
-
+                            <Link to={`/`}>Search</Link>
                         </li>
                         <li>
-                            <a>Communities</a>
+                            <Link to={`/communites`}>Communities</Link>
                         </li>
                         <li>
-
+                            <Link to={`/trending`}>Trending</Link>
                         </li>
                         <li>
                             {/* <span id="login" @click="logout" v-if="loggedin">Logout</span> */}
@@ -30,12 +30,7 @@ export default function Header(): JSX.Element {
             <router-link to="/signup" v-if="!loggedin">Sign Up</router-link>
             <p id="wb" v-if="loggedin">Welcome Back, <router-link to="/account/">{{ name }}</router-link>!</p> */}
             </header >
-            <sub-header>
-                <ul>
-                    {/* <li><router-link to="/account/communities/">> My Communities</router-link></li>
-                    <li><router-link to="/community/">> All</router-link></li> */}
-                </ul>
-            </sub-header>
+
         </>
     )
 }

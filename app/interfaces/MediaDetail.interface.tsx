@@ -55,16 +55,34 @@ export interface Credit {
     job?: string;
     department?: string;
     profile_path?: string;
+
 }
+
+export interface StreamBuyRent {
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+    display_priority: number
+}
+
 
 export interface Stream {
     link: string;
     platform: string;
+    buy: StreamBuyRent[];
+    rent: StreamBuyRent[];
+}
+
+export interface YoutubeTrailer {
+    name: string;
+    size: string;
+    source: string;
+    type: string;
 }
 
 export interface Trailer {
     quicktime: string[];
-    youtube: string[];
+    youtube: YoutubeTrailer[];
 }
 
 export interface VideoResult {
@@ -121,7 +139,7 @@ export interface MediaDetail {
     runtime: number;
     spoken_languages: SpokenLanguage[];
     status: string;
-    streams: Record<string, Stream> | null;
+    streams: Record<string, Stream>;
     tagline: string;
     title: string;
     trailers: Trailer | null;

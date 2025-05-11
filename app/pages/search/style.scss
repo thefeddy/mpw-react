@@ -1,37 +1,3 @@
-section {
-    padding: 30px 50px 0 50px;
-
-    h1,
-    h2 {
-        font-family: 'Poppins';
-        font-size: 24px;
-        font-weight: 500;
-
-        margin-bottom: 10px;
-
-        strong {
-            color: #f79d25;
-        }
-    }
-}
-
-
-.list {
-    display: grid;
-
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-    panel {
-        max-width: 300px;
-    }
-
-    name {
-        cursor: pointer;
-        user-select: none;
-    }
-}
-
 .pagination {
     display: flex;
 
@@ -44,12 +10,14 @@ section {
         font-family: 'Poppins';
         font-size: 14px;
         font-weight: 500;
+        font-weight: bold;
 
         margin-right: 10px;
         margin-right: 20px;
         padding: 8px;
 
         cursor: pointer;
+        transition: box-shadow 550ms ease-in-out;
         text-decoration: none;
         letter-spacing: 1px;
 
@@ -57,11 +25,13 @@ section {
         border: none;
         outline: none;
         background: #e5771e;
-    }
+        box-shadow: 5px 5px #fffceb;
 
-    .router-link-active {
-        font-weight: bold;
+        will-change: box-shadow;
 
-        box-shadow: 5px 5px #bb3f03;
+        &.active,
+        &:hover {
+            box-shadow: 5px 5px #bb3f03;
+        }
     }
 }
