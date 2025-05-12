@@ -5,10 +5,13 @@ import './scss/app.scss';
 import LinesBG from '~/components/LinesBG/LinesBG';
 
 /* Components */
-import Header from './components/Header/Header';
+import Header from '~/components/Header/Header';
 
 /* Utils */
 import { errorQuotes } from '~/utils/quotes';
+
+/* Context */
+import { UserProvider } from '~/context/UserContext';
 
 /* React */
 import type { Route } from "./+types/root";
@@ -73,10 +76,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Links />
             </head>
             <body>
-                <Header />
-                {children}
-                <ScrollRestoration />
-                <Scripts />
+                <UserProvider>
+                    <Header />
+                    {children}
+                    <ScrollRestoration />
+                    <Scripts />
+                </UserProvider>
             </body>
         </html>
     );
@@ -120,7 +125,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
                 <p>"{randomQuote.quote}"</p>
                 <footer>— {randomQuote.description}</footer>
             </blockquote>
-
             {stack && (
                 <pre>
                     <code>{stack}</code>

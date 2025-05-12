@@ -1,11 +1,16 @@
 /* SCSS */
 import './Header.scss'
 
+/* Store */
+import { useUser } from '~/context/UserContext';
+
 /* Libs */
 import type { JSX } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 
 export default function Header(): JSX.Element {
+    const { token, logout } = useUser();
+
     return (
         <>
             <header>

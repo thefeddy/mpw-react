@@ -21,7 +21,7 @@ export const errorQuotes: Record<string, { quote: string; description: string }>
     },
     fewGoodMen: {
         quote: "You can't handle the truth!",
-        description: "You can't handle the 404!"
+        description: "You can't handle the error!"
     },
     sixthSense: {
         quote: "I see dead links.",

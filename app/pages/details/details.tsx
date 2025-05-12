@@ -139,13 +139,13 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                         <h1>Streams</h1>
                         <span>Renting</span>
                         <ul>
-                            {details.streams.rent?.map((rent: StreamBuyRent) => (
+                            {details.streams?.rent?.map((rent: StreamBuyRent) => (
                                 <li key={`rent-${rent.provider_name}`}><img src={`https://image.tmdb.org/t/p/original/${rent.logo_path}`} /></li>
                             ))}
                         </ul>
                         <span>Buying</span>
                         <ul>
-                            {details.streams.buy?.map((buy: StreamBuyRent) => (
+                            {details.streams?.buy?.map((buy: StreamBuyRent) => (
                                 <li key={`rent-${buy.provider_name}`}><img src={`https://image.tmdb.org/t/p/original/${buy.logo_path}`} /></li>
                             ))}
                         </ul>
