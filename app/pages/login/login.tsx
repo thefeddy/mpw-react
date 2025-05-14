@@ -6,7 +6,7 @@ import './style.scss'
 import LinesBG from 'app/components/LinesBG/LinesBG';
 
 /* Services */
-import api from '../../services/api';
+import api from '~/services/api';
 
 /* Context */
 import { useUser } from '~/context/UserContext';
@@ -22,6 +22,7 @@ export function LoginScreen() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { login } = useUser();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,8 +34,8 @@ export function LoginScreen() {
 
             if (response.access_token) {
                 const { access_token } = await response;
-                console.log(access_token)
-                login(access_token); // Store user and token
+                login(access_token);
+                navigate('/communities/');
             } else {
                 setError('Invalid credentials');
             }
@@ -48,7 +49,7 @@ export function LoginScreen() {
 
     return (
         <main>
-            <form onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={handleSubmit}>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <label>Email</label>
                 <input type="email" placeholder="Email"
@@ -56,7 +57,7 @@ export function LoginScreen() {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <label>Password</label>
-                <input type="password" placeholder="password"
+                <input type="password" placeholder="password" name="current-password"
                     required value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />

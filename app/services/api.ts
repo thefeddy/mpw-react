@@ -83,6 +83,21 @@ const api = {
             return null;
         }
     },
+
+    async validate(jwt: any): Promise<any> {
+        try {
+            const res = await fetch(`${API_URL}/auth/validate-token/`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${jwt}`, },
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.error('API error in genres:', err);
+            return null;
+        }
+    },
 };
 
 export default api;

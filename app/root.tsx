@@ -1,6 +1,9 @@
 /* SCSS */
 import './scss/app.scss';
 
+/* Services */
+import api from '~/services/api';
+
 /* Components */
 import LinesBG from '~/components/LinesBG/LinesBG';
 
@@ -11,10 +14,12 @@ import Header from '~/components/Header/Header';
 import { errorQuotes } from '~/utils/quotes';
 
 /* Context */
-import { UserProvider } from '~/context/UserContext';
+import { UserProvider, useUser } from '~/context/UserContext';
+
 
 /* React */
 import type { Route } from "./+types/root";
+
 
 import { useEffect, useState } from 'react';
 

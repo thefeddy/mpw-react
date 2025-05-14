@@ -25,7 +25,7 @@ export function TrendingScreen() {
             try {
                 const data = await api.getTrending();
                 if (data && data.results) {
-                    console.log(data)
+
                     setResults(data.results);
 
                 }

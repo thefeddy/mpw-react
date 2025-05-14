@@ -4,12 +4,21 @@ import './Header.scss'
 /* Store */
 import { useUser } from '~/context/UserContext';
 
+/* Routes */
+import ProtectedLink from '~/routes/ProtectedLink';
+
+/* Interfaces */
+import type { DecodedUser } from '~/interfaces/DecodeUser.interace';
+
 /* Libs */
 import type { JSX } from 'react'
 import { Link, NavLink } from 'react-router-dom';
+import { isExpired, decodeToken } from 'react-jwt';
+
 
 export default function Header(): JSX.Element {
     const { token, logout } = useUser();
+    const user: DecodedUser | null = token ? decodeToken<DecodedUser>(token) : null;
 
     return (
         <>
@@ -20,20 +29,23 @@ export default function Header(): JSX.Element {
                             <Link to={`/`}>Search</Link>
                         </li>
                         <li>
-                            <Link to={`/communites`}>Communities</Link>
+
                         </li>
                         <li>
                             <Link to={`/trending`}>Trending</Link>
                         </li>
-                        <li>
-                            {/* <span id="login" @click="logout" v-if="loggedin">Logout</span> */}
+                        <li id="login">
+                            {token ? (
+                                <Link to={`/logout`}>Logout</Link>
+                            ) : (
+                                <Link to={`/login`}>Login</Link>
+                            )}
                         </li>
                     </ul>
-                </nav >
-
-                {/* <router-link id="login" to="/login" v-if="!loggedin">Login</router-link>
-            <router-link to="/signup" v-if="!loggedin">Sign Up</router-link>
-            <p id="wb" v-if="loggedin">Welcome Back, <router-link to="/account/">{{ name }}</router-link>!</p> */}
+                </nav>
+                {token && (
+                    <p id="wb">Welcome Back, <ProtectedLink to={`/account/`}>{user?.display_name}</ProtectedLink>!</p>
+                )}
             </header >
 
         </>
