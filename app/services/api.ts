@@ -4,6 +4,9 @@ const headers = {
     'Content-Type': 'application/json',
 };
 
+/* Context */
+import type { UserCreate } from '~/interfaces/UserContext.interface';
+
 const api = {
     async searchTV(type: string, query: string, page: number): Promise<any> {
         try {
@@ -89,6 +92,28 @@ const api = {
             const res = await fetch(`${API_URL}/auth/validate-token/`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${jwt}`, },
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.error('API error in genres:', err);
+            return null;
+        }
+    },
+
+    async signup(user: UserCreate): Promise<any> {
+        console.log(user);
+        let body = new URLSearchParams();
+        body.append('email', user.email);
+        body.append('password', user.password);
+        body.append('display_name', user.display_name);
+
+        try {
+            const res = await fetch(`${API_URL}/user/create/`, {
+                method: 'POST',
+                body,
+                redirect: 'follow'
             });
 
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);

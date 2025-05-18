@@ -8,9 +8,8 @@ interface ProtectedLinkProps {
 
 const ProtectedLink = ({ to, children }: ProtectedLinkProps) => {
     const { isValid } = useUser();
-    console.log(isValid)
     if (isValid === null) {
-        return <span>Loading...</span>; // You can put a loader here
+        return; // You can put a loader here
     }
 
     if (!isValid) {

@@ -9,6 +9,7 @@ import type { JSX } from 'react'
 import { useState, useEffect } from 'react';
 
 export default function Poster(details: any): JSX.Element {
+
     return (
         <>
             <div className="panel">
@@ -22,11 +23,11 @@ export default function Poster(details: any): JSX.Element {
                     <span>{details.data.title}<em>({details.data.original_language})</em></span>
                     <div className="info">
                         <em></em>
-                        {details.data.vote_average.toFixed(1)}
-                        <i>|</i>
+                        {details.data.vote_average}
+                        {/* <i>|</i>
                         <div className="genres">
-                            {details.data.genres}
-                        </div>
+                            <p>{details.data.genres.map((genre: any) => genre.name).join(', ')}</p>
+                        </div> */}
                     </div>
                 </div>
             </div >

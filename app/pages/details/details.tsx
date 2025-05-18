@@ -47,18 +47,18 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
     // do some fancy loading thingy frames or maybe not worry about the backdrop throwing a 404 until it's fully loaded?
 
     return (
-        <main>
-            <section>
+        <main id="media-details">
+            <section className="showcase">
                 <div id="header" style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path ?? details.background})`,
                 }}>
                     <div className="detail">
                         <h1>{details.title || details.original_name}</h1>
                         <h2>{details.tagline}</h2>
-                        <div className="info">
-                            <span className="genres">
-                                {details.genres?.length
-                                    ? details.genres.map((genre, index) => {
+                        {details.genres?.length > 0 && (
+                            <div className="info">
+                                <span className="genres">
+                                    {details.genres.map((genre, index) => {
                                         const colors = getGenreColors(genre.name);
                                         return (
                                             <span
@@ -72,10 +72,10 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                                                 {genre.name}
                                             </span>
                                         );
-                                    })
-                                    : 'No genres available'}
-                            </span>
-                        </div>
+                                    })}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
@@ -89,7 +89,7 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                                     season.poster_path && (
                                         <img
                                             key={season.id}
-                                            src={`https://image.tmdb.org/t/p/original/${season.poster_path}`}
+                                            src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
                                             alt={season.name}
                                         />
                                     )
@@ -103,7 +103,7 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                                     <div className="photo">
                                         {cast.profile_path && (
                                             <img
-                                                src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+                                                src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
                                                 alt={cast.name}
                                             />
                                         )}

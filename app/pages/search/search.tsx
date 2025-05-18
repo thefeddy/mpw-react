@@ -28,6 +28,7 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page })
             try {
                 const data = await api.searchTV(type, query, pageNumber);
                 if (data && data.results) {
+                    console.log(typeof data.results.results)
                     setResults(data.results.results);
                     setTotalResults(data.results.total_results);
                     setTotalPages(data.results.total_pages)

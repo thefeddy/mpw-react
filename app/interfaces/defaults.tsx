@@ -1,5 +1,7 @@
 // ~/interfaces/defaults.ts
 import type { MediaDetail } from '~/interfaces/MediaDetail.interface';
+import type { UserCommunities } from './UserContext.interface';
+import type { Community } from './Communities.interface';
 
 export const createDefaultMediaDetail = (): MediaDetail => ({
     adult: false,
@@ -42,3 +44,24 @@ export const createDefaultMediaDetail = (): MediaDetail => ({
     seasons: [],
     original_name: ''
 });
+
+
+export const createDefaultUserCommunities = (): UserCommunities => ({
+    communities: [],
+    display_name: '',
+    id: 0,
+    joined: ''
+});
+
+export const createDefaultCommunity = (): Community => ({
+    id: 0,
+    name: '',
+    open: false,
+    private: false,
+    discord_webhook: '',
+    banner: '',
+    created: '',
+    discord: '',
+    photo: '',
+});
+

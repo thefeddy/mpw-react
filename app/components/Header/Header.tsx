@@ -12,8 +12,8 @@ import type { DecodedUser } from '~/interfaces/DecodeUser.interace';
 
 /* Libs */
 import type { JSX } from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import { isExpired, decodeToken } from 'react-jwt';
+import { Link } from 'react-router-dom';
+import { decodeToken } from 'react-jwt';
 
 
 export default function Header(): JSX.Element {
@@ -29,7 +29,7 @@ export default function Header(): JSX.Element {
                             <Link to={`/`}>Search</Link>
                         </li>
                         <li>
-
+                            <ProtectedLink to={`/communities/`}>Communities</ProtectedLink>
                         </li>
                         <li>
                             <Link to={`/trending`}>Trending</Link>
@@ -43,9 +43,12 @@ export default function Header(): JSX.Element {
                         </li>
                     </ul>
                 </nav>
-                {token && (
+                {token ? (
                     <p id="wb">Welcome Back, <ProtectedLink to={`/account/`}>{user?.display_name}</ProtectedLink>!</p>
+                ) : (
+                    <Link to={`/signup`}>Signup</Link>
                 )}
+
             </header >
 
         </>
