@@ -48,6 +48,7 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
     return (
         <main id="media-details">
+            {/* Move this into a compotent - using it in community as well */}
             <section className="showcase">
                 <div id="header" style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path ?? details.background})`,
