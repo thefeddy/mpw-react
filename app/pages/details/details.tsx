@@ -77,6 +77,20 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                             </div>
                         )}
                     </div>
+
+                </div>
+                <div className="cast">
+                    {details.credits?.cast.map((cast) => (
+                        <div class="cast-list">
+                            <div key={cast.id} className="actor" style={cast.profile_path ? {
+                                backgroundImage: `url(https://image.tmdb.org/t/p/original${cast.profile_path})`
+                            } : {}}>
+                                <div className="details">
+                                    <p>{cast.name}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -96,21 +110,6 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                                 ))}
                             </div>
                         )}
-                        <div id="cast">
-                            {details.credits?.cast.map((cast) => (
-                                <div key={cast.id} className="actor">
-                                    <p>{cast.name}</p>
-                                    <div className="photo">
-                                        {cast.profile_path && (
-                                            <img
-                                                src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
-                                                alt={cast.name}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
                         <div className="trailers">
                             {details.trailers?.youtube
                                 .filter((trailer) => trailer.type === 'Trailer')

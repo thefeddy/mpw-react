@@ -21,17 +21,21 @@ import { useState, useEffect, useCallback } from 'react';
 
 /* libs */
 import { format } from "date-fns";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
 
     // 🏷️ State Management
     const [details, setDetails] = useState<Community | null>(null);
-    const [movies, setMovies] = useState();
+    const [watchedMovies, setWatchedMovies] = useState();
+    const [unwatchedMovies, setUnwatchedMovies] = useState();
     const [passcode, setPasscode] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [refresh, setRefresh] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
+    // Navigate
+    const navigate = useNavigate();
 
     // 🔄 Fetch Data Logic
     const fetchDetails = useCallback(async () => {
@@ -39,16 +43,35 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
 
         try {
             const data = await communities.getCommunitiesById(Number(id));
-            const movies = data.movies.map(({ details, ...rest }) => ({
-                ...rest,
-                ...details,
-            }));
-
-            console.log(movies);
-            data.created = format(data.created, 'yyyy-MM-dd');
-            setDetails(data);
-            setMovies(movies);
             console.log(data);
+            if (data && data.id) {
+                const watchedMovies = data.movies
+                    .filter((movie: any) => movie.watched_on !== null)
+                    .map(({ details, ...rest }) => ({
+                        ...rest,
+                        ...details,
+                    }));
+
+                const unwatchedMovies = data.movies
+                    .filter((movie: any) => movie.watched_on === null)
+                    .map(({ details, ...rest }) => ({
+                        ...rest,
+                        ...details,
+                    }));
+
+
+                data.created = format(data.created, 'yyyy-MM-dd');
+                setDetails(data);
+                setWatchedMovies(watchedMovies);
+                setUnwatchedMovies(unwatchedMovies);
+            }
+
+            if (!data) {
+                navigate('/'); // deny access kick em out
+            }
+
+
+
 
         } catch (error) {
             console.error("Error fetching results:", error);
@@ -85,6 +108,7 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
             if (res.statusCode === 202) {
                 refreshData();
             }
+
         } catch (error) {
             console.error("Error leaving community:", error);
         }
@@ -171,17 +195,30 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
                         </div>
                     )}
                 </section>
-
-
                 <section id="results">
-                    {movies?.length > 0 && (
-                        <div className="list">
-                            {movies?.map((movie: any) => (
-                                <Link key={movie.id} to={`/details/movie/${movie.movie_id}`}>
-                                    <Poster data={movie} />
-                                </Link>
-                            ))}
-                        </div>
+                    {watchedMovies?.length > 0 && (
+                        <>
+                            <h1>Watched Movies</h1>
+                            <div className="list">
+                                {watchedMovies?.map((movie: any) => (
+                                    <Link key={movie.id} to={`/details/movie/${movie.movie_id}`}>
+                                        <Poster data={movie} />
+                                    </Link>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                    {unwatchedMovies?.length > 0 && (
+                        <>
+                            <h1>Unwatched Movies</h1>
+                            <div className="list">
+                                {unwatchedMovies?.map((movie: any) => (
+                                    <Link key={movie.id} to={`/details/movie/${movie.movie_id}`}>
+                                        <Poster data={movie} />
+                                    </Link>
+                                ))}
+                            </div>
+                        </>
                     )}
                 </section>
             </main >
