@@ -162,46 +162,6 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
 
             <main className="community-details">
                 <Header data={details} />
-                <section className="showcase" style={{ display: 'none' }}>
-                    <div style={{
-                        backgroundImage: `url(${details.banner})`,
-                    }} className={`header ${details?.movies.length > 0 ? 'has-movies' : ''}`}>
-                        {details.movies.length > 0 && (<h3>Latest Movies</h3>)}
-                        <div className="detail">
-                            <div>
-                                <h1>{details.name}</h1>
-                                <h2>Members: {details.members.length + 1} | Created: {details.created}</h2>
-                            </div>
-                            {!details.isOwner && (
-                                <div className="actions">
-                                    {details.isMember ? (
-                                        <button onClick={() => leaveCommunity(details.id)}>Leave</button>
-                                    ) : (
-                                        <button onClick={() => joinCommunity(details.id, details.private)}>Join!</button>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    {details.movies.length > 0 && (
-                        <div className="latest-movies">
-                            <div className="movies-list">
-                                {details.movies.sort((a: any, b: any) => b.id - a.id).slice(0, 5).map((movie) => (
-                                    <Link key={movie.id} to={`/details/movie/${movie.details.id}`}>
-                                        <div className="movie" style={{
-                                            backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.details.backdrop_path})`,
-                                        }} >
-                                            <div className="details">
-                                                <p>{movie.details.title || movie.details.original_name}</p>
-                                                <span>{movie.details.tagline}</span>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </section>
                 <section id="results">
                     {watchedMovies?.length > 0 && (
                         <>
