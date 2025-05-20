@@ -13,11 +13,6 @@ import type { JSX } from 'react'
 
 
 export default function Header({ data }: HeaderProps): JSX.Element {
-    const background = data.backdrop_path
-        ? `https://image.tmdb.org/t/p/original${data?.backdrop_path}`
-        : data.background
-            ? `https://image.tmdb.org/t/p/original${data?.background}`
-            : data.banner;
     const tagline = data?.tagline ? data?.tagline : `Members: ${data.members.length + 1} | Created: ${data.created}`
     const asideData = data.credits?.cast ? data.credits?.cast : data.movies;
 
