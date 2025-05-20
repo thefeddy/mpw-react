@@ -161,7 +161,7 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
             )}
 
             <main className="community-details">
-                <Header data={details} />
+                <Header data={details} type="movie" />
                 <section id="results">
                     {watchedMovies?.length > 0 && (
                         <>

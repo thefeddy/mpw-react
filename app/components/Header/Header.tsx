@@ -9,15 +9,40 @@ import { getGenreColors } from '~/utils/genres';
 
 /* React */
 import type { JSX } from 'react'
+import { Link } from 'react-router-dom';
 
 
 
-export default function Header({ data }: HeaderProps): JSX.Element {
-    console.log(data);
-
-    const tagline = (data?.tagline || data?.tagline === '') ? data?.tagline : `Members: ${data.members.length + 1} | Created: ${data.created}`
+export default function Header({ data, type }: HeaderProps): JSX.Element {
+    const tagline =
+        typeof data?.tagline === 'string' && data.tagline.trim() !== ''
+            ? data.tagline
+            : (Array.isArray(data?.members) && data?.created)
+                ? `Members: ${data.members.length + 1} | Created: ${data.created}`
+                : '';
     const asideData = data.credits?.cast ? data.credits?.cast : data.movies;
-    const getBackgroundImage = (data: any): string => {
+
+    /* Utils */
+    const getDisplayTitle = (data: any): string => {
+        return (
+            data?.name ||
+            data?.details?.title ||
+            data?.details?.original_name ||
+            data?.title ||
+            'Untitled'
+        );
+    };
+
+    const getTagLine = (data: any): string => {
+        return (
+            data?.details?.tagline ||
+            data.character ||
+
+            'Untitled'
+        );
+    };
+
+    const getBackgroundImage = (data: any): string | undefined => {
         const paths = [
             data.profile_path && `https://image.tmdb.org/t/p/original${data.profile_path}`,
             data.details?.backdrop_path && `https://image.tmdb.org/t/p/original${data.details.backdrop_path}`,
@@ -26,8 +51,14 @@ export default function Header({ data }: HeaderProps): JSX.Element {
             data.backdrop_path && `https://image.tmdb.org/t/p/original${data.backdrop_path}`,
             data.banner
         ];
-        // need to design a background as a default
-        return `url(${paths.find(Boolean)})`;
+
+        const url = paths.find(Boolean);
+        return url ? `url(${url})` : undefined;
+    };
+
+    const getLinkPath = (type: string, data: any): string => {
+        if (type === 'cast') return `/cast/${data.id}`;
+        return `/details/${type}/${data.movie_id || data.id}`;
     };
 
     const renderGenres = () => (
@@ -58,18 +89,21 @@ export default function Header({ data }: HeaderProps): JSX.Element {
                 <div className="detail">
                     <h1>{data.name || data.original_name || data.title}</h1>
                     <h2>{tagline}</h2>
-                    {data.genres?.length > 0 && renderGenres()}
+                    {Array.isArray(data.genres) && data.genres.length > 0 && renderGenres()}
                 </div>
 
             </section>
             <aside>
                 <ul>
                     {asideData.map((data: any) => (
-                        <li className="item" key={data.id} style={{ backgroundImage: getBackgroundImage(data) }}>
-                            <div className="details">
-                                <p>{data.name || data.details.title || data.details.original_name}</p>
-                                <span>{data?.details?.tagline || data.character}</span>
-                            </div>
+                        <li key={data.id} className={`item ${!getBackgroundImage(data) ? 'default-background' : ''}`}
+                            style={getBackgroundImage(data) ? { backgroundImage: getBackgroundImage(data) } : {}}>
+                            <Link to={getLinkPath(type, data)}>
+                                <div className="details">
+                                    <p>{getDisplayTitle(data)}</p>
+                                    <span>{getTagLine(data)}</span>
+                                </div>
+                            </Link>
                         </li>
                     ))}
                 </ul>

@@ -1,3 +1,4 @@
 export interface HeaderProps {
-    data: any
+    data: any;
+    type: string;
 }

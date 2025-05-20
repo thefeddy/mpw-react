@@ -12,15 +12,14 @@ import type { DetailScreenProps, MediaDetail } from '~/interfaces/MediaDetail.in
 import type { StreamBuyRent } from '~/interfaces/StreamBuyRent.inteface';
 import { createDefaultMediaDetail } from '~/interfaces/defaults';
 
-
 /* React */
 import { useState, useEffect } from 'react';
-
 
 export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
     const [details, setDetails] = useState<MediaDetail>(createDefaultMediaDetail());
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchResults = async () => {
             try {
@@ -45,7 +44,7 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
     return (
         <main id="media-details">
-            <Header data={details} />
+            <Header data={details} type="cast" />
 
             <section id="details">
                 <div className="container">
@@ -89,8 +88,8 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                         </ul>
 
                         <h1>Streams</h1>
-                        <RenderStreamList label="Rent" streams={details.streams?.rent} />
-                        <RenderStreamList label="Buy" streams={details.streams?.buy} />
+                        {details.streams?.rent.length > 0 && (<RenderStreamList label="Rent" streams={details.streams?.rent} />)}
+                        {details.streams?.buy.length > 0 && (<RenderStreamList label="Buy" streams={details.streams?.buy} />)}
                     </div>
                 </div>
             </section >
