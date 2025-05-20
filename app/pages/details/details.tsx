@@ -3,7 +3,7 @@ import './style.scss'
 
 /* Components */
 import RenderStreamList from './components/RenderStreamList';
-
+import Header from '~/components/Header/Header';
 /* Services */
 import api from '~/services/api';
 
@@ -12,8 +12,6 @@ import type { DetailScreenProps, MediaDetail } from '~/interfaces/MediaDetail.in
 import type { StreamBuyRent } from '~/interfaces/StreamBuyRent.inteface';
 import { createDefaultMediaDetail } from '~/interfaces/defaults';
 
-/* Utils */
-import { getGenreColors } from '~/utils/genres';
 
 /* React */
 import { useState, useEffect } from 'react';
@@ -47,53 +45,7 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
     return (
         <main id="media-details">
-            {/* Move this into a compotent - using it in community as well */}
-            <section className="showcase">
-                <div id="header" style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path ?? details.background})`,
-                }}>
-                    <div className="detail">
-                        <h1>{details.title || details.original_name}</h1>
-                        <h2>{details.tagline}</h2>
-                        {details.genres?.length > 0 && (
-                            <div className="info">
-                                <span className="genres">
-                                    {details.genres.map((genre, index) => {
-                                        const colors = getGenreColors(genre.name);
-                                        return (
-                                            <span
-                                                key={index}
-                                                className="genre"
-                                                style={{
-                                                    backgroundColor: colors.primary,
-                                                    boxShadow: `2px 2px 6px ${colors.accent}`,
-                                                }}
-                                            >
-                                                {genre.name}
-                                            </span>
-                                        );
-                                    })}
-                                </span>
-                            </div>
-                        )}
-                    </div>
-
-                </div>
-                <div className="cast">
-                    {details.credits?.cast.map((cast) => (
-                        <div className="cast-list" key={cast.id}>
-                            <div className="actor" style={cast.profile_path ? {
-                                backgroundImage: `url(https://image.tmdb.org/t/p/original${cast.profile_path})`
-                            } : {}}>
-                                <div className="details">
-                                    <p>{cast.name}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
+            <Header data={details} />
             <section id="details">
                 <div className="container">
                     <aside>

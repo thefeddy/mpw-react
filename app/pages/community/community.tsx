@@ -5,6 +5,7 @@ import './style.scss';
 import LinesBG from '~/components/LinesBG/LinesBG';
 import Modal from '~/components/Modal/Modal';
 import Poster from '~/components/Poster/Poster';
+import Header from '~/components/Header/Header';
 
 /* Services */
 import communities from '~/services/communities';
@@ -160,8 +161,8 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
             )}
 
             <main className="community-details">
-
-                <section className="showcase">
+                <Header data={details} />
+                <section className="showcase" style={{ display: 'none' }}>
                     <div style={{
                         backgroundImage: `url(${details.banner})`,
                     }} className={`header ${details?.movies.length > 0 ? 'has-movies' : ''}`}>
