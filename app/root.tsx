@@ -8,7 +8,7 @@ import api from '~/services/api';
 import LinesBG from '~/components/LinesBG/LinesBG';
 
 /* Components */
-import Header from '~/components/Header/Header';
+import Navigation from '~/components/Navigation/Navigation';
 
 /* Utils */
 import { errorQuotes } from '~/utils/quotes';
@@ -82,7 +82,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </head>
             <body>
                 <UserProvider>
-                    <Header />
+                    <Navigation />
                     {children}
                     <ScrollRestoration />
                     <Scripts />

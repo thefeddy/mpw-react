@@ -2,7 +2,7 @@
 import './style.scss'
 
 /* Components */
-
+import RenderStreamList from './components/RenderStreamList';
 
 /* Services */
 import api from '~/services/api';
@@ -40,7 +40,6 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
         fetchResults();
     }, [type, id]);
-
 
 
     if (loading) return <p>Loading...</p>;
@@ -82,8 +81,8 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                 </div>
                 <div className="cast">
                     {details.credits?.cast.map((cast) => (
-                        <div class="cast-list">
-                            <div key={cast.id} className="actor" style={cast.profile_path ? {
+                        <div className="cast-list" key={cast.id}>
+                            <div className="actor" style={cast.profile_path ? {
                                 backgroundImage: `url(https://image.tmdb.org/t/p/original${cast.profile_path})`
                             } : {}}>
                                 <div className="details">
@@ -137,18 +136,8 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                         </ul>
 
                         <h1>Streams</h1>
-                        <span>Renting</span>
-                        <ul>
-                            {details.streams?.rent?.map((rent: StreamBuyRent) => (
-                                <li key={`rent-${rent.provider_name}`}><img src={`https://image.tmdb.org/t/p/original/${rent.logo_path}`} /></li>
-                            ))}
-                        </ul>
-                        <span>Buying</span>
-                        <ul>
-                            {details.streams?.buy?.map((buy: StreamBuyRent) => (
-                                <li key={`rent-${buy.provider_name}`}><img src={`https://image.tmdb.org/t/p/original/${buy.logo_path}`} /></li>
-                            ))}
-                        </ul>
+                        <RenderStreamList label="Rent" streams={details.streams?.rent} />
+                        <RenderStreamList label="Buy" streams={details.streams?.buy} />
                     </div>
                 </div>
             </section >

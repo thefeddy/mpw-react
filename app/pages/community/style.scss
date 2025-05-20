@@ -17,6 +17,55 @@
     }
 }
 
+.owner-navigation {
+    position: fixed;
+    z-index: 20;
+    top: 77px;
+
+    display: flex;
+
+    width: 100%;
+    height: 77px;
+    padding-left: 25px;
+
+    border-bottom: 1px solid #937650;
+    background-color: #fffceb;
+
+    align-items: center;
+
+    ul {
+        display: flex;
+
+        list-style: none;
+
+        li {
+            margin-right: 15px;
+
+            a {
+                font-family: 'Poppins';
+                font-size: 14px;
+                font-weight: 500;
+
+                display: block;
+
+                padding: 8px;
+
+                cursor: pointer;
+                text-decoration: none;
+                letter-spacing: 1px;
+
+                color: #fff;
+                border: none;
+                outline: none;
+                background: #e5771e;
+                box-shadow: 5px 5px #bb3f03;
+
+                appearance: none;
+            }
+        }
+    }
+}
+
 #details {
     padding-top: 50px;
 

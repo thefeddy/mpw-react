@@ -146,12 +146,18 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
     // ✅ Render
     return (
         <>
-            {/* <Modal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                body={<PasscodeForm passcode={passcode} setPasscode={setPasscode} />}
-                title='Passcode'
-            /> */}
+            {details.isOwner && (
+                <nav className="owner-navigation">
+                    <ul>
+                        <li>
+                            <Link to="/">Settings</Link>
+                        </li>
+                        <li>
+                            <Link to="/">Members</Link>
+                        </li>
+                    </ul>
+                </nav>
+            )}
 
             <main className="community-details">
 
@@ -159,7 +165,7 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
                     <div style={{
                         backgroundImage: `url(${details.banner})`,
                     }} className={`header ${details?.movies.length > 0 ? 'has-movies' : ''}`}>
-                        <h3>Latest Movies</h3>
+                        {details.movies.length > 0 && (<h3>Latest Movies</h3>)}
                         <div className="detail">
                             <div>
                                 <h1>{details.name}</h1>
