@@ -60,18 +60,19 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page })
                         <p>No results found</p>
                     )}
                 </div>
-
-                <div className="pagination">
-                    {[...Array(totalPages)].map((_, index) => (
-                        <NavLink
-                            key={index}
-                            to={`/search/${type}/${query}/${index + 1}`}
-                            className={({ isActive }) => (isActive ? 'active' : '')}
-                        >
-                            {index + 1}
-                        </NavLink>
-                    ))}
-                </div>
+                {totalPages > 1 && (
+                    <div className="pagination">
+                        {[...Array(totalPages)].map((_, index) => (
+                            <NavLink
+                                key={index}
+                                to={`/search/${type}/${query}/${index + 1}`}
+                                className={({ isActive }) => (isActive ? 'active' : '')}
+                            >
+                                {index + 1}
+                            </NavLink>
+                        ))}
+                    </div>
+                )}
             </section>
         </main>
     );

@@ -3,6 +3,7 @@ import type { Genre } from '~/utils/genres.d';
 export const GENRES: Genre[] = [
     { id: 28, name: 'Action', primaryColor: '#e5771e', accentColor: '#bb3f03' },
     { id: 12, name: 'Adventure', primaryColor: '#d4a017', accentColor: '#b38600' },
+    { id: 10759, name: 'Action & Adventure', primaryColor: '#e5771e', accentColor: '#bb3f03' },
     { id: 16, name: 'Animation', primaryColor: '#ffb142', accentColor: '#e08728' },
     { id: 35, name: 'Comedy', primaryColor: '#ffda79', accentColor: '#cfa727' },
     { id: 80, name: 'Crime', primaryColor: '#9b111e', accentColor: '#7c0b14' },
@@ -16,10 +17,12 @@ export const GENRES: Genre[] = [
     { id: 9648, name: 'Mystery', primaryColor: '#34495e', accentColor: '#2c3e50' },
     { id: 10749, name: 'Romance', primaryColor: '#e75480', accentColor: '#c74360' },
     { id: 878, name: 'Science Fiction', primaryColor: '#16a085', accentColor: '#0e6655' },
+    { id: 10759, name: 'Sci-Fi & Fantasy', primaryColor: '#16a085', accentColor: '#0e6655' },
     { id: 10770, name: 'TV Movie', primaryColor: '#f39c12', accentColor: '#d68910' },
     { id: 53, name: 'Thriller', primaryColor: '#9b59b6', accentColor: '#7d3c98' },
     { id: 10752, name: 'War', primaryColor: '#5d6d7e', accentColor: '#34495e' },
-    { id: 37, name: 'Western', primaryColor: '#a0522d', accentColor: '#8b4513' }
+    { id: 37, name: 'Western', primaryColor: '#a0522d', accentColor: '#8b4513' },
+    { id: 10762, name: 'Kids', primaryColor: '#a0522d', accentColor: '#8b4513' }
 ];
 
 export const getGenreColors = (name: string) => {

@@ -9,13 +9,25 @@ header {
         display: flex;
         flex-direction: column;
 
-        width: 80%;
+        width: 100%;
 
         background-attachment: fixed;
         background-position: center center;
         background-size: cover;
 
         justify-content: flex-end;
+    }
+
+    &.has-media {
+        section {
+            width: 80%;
+        }
+
+        aside {
+            display: block;
+
+            width: 20%;
+        }
     }
 
     .detail {
@@ -119,6 +131,7 @@ header {
     }
 
     aside {
+        display: none;
         overflow-y: scroll;
 
         width: 20%;

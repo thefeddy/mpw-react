@@ -13,9 +13,10 @@ import type { JSX } from 'react'
 
 
 export default function Header({ data }: HeaderProps): JSX.Element {
-    const tagline = data?.tagline ? data?.tagline : `Members: ${data.members.length + 1} | Created: ${data.created}`
-    const asideData = data.credits?.cast ? data.credits?.cast : data.movies;
+    console.log(data);
 
+    const tagline = (data?.tagline || data?.tagline === '') ? data?.tagline : `Members: ${data.members.length + 1} | Created: ${data.created}`
+    const asideData = data.credits?.cast ? data.credits?.cast : data.movies;
     const getBackgroundImage = (data: any): string => {
         const paths = [
             data.profile_path && `https://image.tmdb.org/t/p/original${data.profile_path}`,
@@ -25,37 +26,39 @@ export default function Header({ data }: HeaderProps): JSX.Element {
             data.backdrop_path && `https://image.tmdb.org/t/p/original${data.backdrop_path}`,
             data.banner
         ];
-
+        // need to design a background as a default
         return `url(${paths.find(Boolean)})`;
     };
 
+    const renderGenres = () => (
+        <div className="info">
+            <span className="genres">
+                {data.genres.map((genre: any, index: number) => {
+                    const colors = getGenreColors(genre.name);
+                    return (
+                        <span
+                            key={index}
+                            className="genre"
+                            style={{
+                                backgroundColor: colors.primary,
+                                boxShadow: `2px 2px 6px ${colors.accent}`,
+                            }}
+                        >
+                            {genre.name}
+                        </span>
+                    );
+                })}
+            </span>
+        </div>
+    );
+
     return (
-        <header>
+        <header className={`${asideData.length > 0 ? 'has-media' : ''}`}>
             <section style={{ backgroundImage: getBackgroundImage(data) }}>
                 <div className="detail">
-                    <h1>{data.title || data.original_name || data.name}</h1>
+                    <h1>{data.name || data.original_name || data.title}</h1>
                     <h2>{tagline}</h2>
-                    {data.genres?.length > 0 && (
-                        <div className="info">
-                            <span className="genres">
-                                {data.genres.map((genre: any, index: number) => {
-                                    const colors = getGenreColors(genre.name);
-                                    return (
-                                        <span
-                                            key={index}
-                                            className="genre"
-                                            style={{
-                                                backgroundColor: colors.primary,
-                                                boxShadow: `2px 2px 6px ${colors.accent}`,
-                                            }}
-                                        >
-                                            {genre.name}
-                                        </span>
-                                    );
-                                })}
-                            </span>
-                        </div>
-                    )}
+                    {data.genres?.length > 0 && renderGenres()}
                 </div>
 
             </section>
@@ -65,7 +68,7 @@ export default function Header({ data }: HeaderProps): JSX.Element {
                         <li className="item" key={data.id} style={{ backgroundImage: getBackgroundImage(data) }}>
                             <div className="details">
                                 <p>{data.name || data.details.title || data.details.original_name}</p>
-                                <span>{data?.details?.tagline}</span>
+                                <span>{data?.details?.tagline || data.character}</span>
                             </div>
                         </li>
                     ))}

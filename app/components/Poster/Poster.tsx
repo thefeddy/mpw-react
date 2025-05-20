@@ -1,15 +1,12 @@
 /* SCSS */
 import './style.scss'
 
-/* Services */
-import api from '~/services/api';
-
 /* Libs */
 import type { JSX } from 'react'
-import { useState, useEffect } from 'react';
+
 
 export default function Poster(details: any): JSX.Element {
-
+    console.log(details);
     return (
         <>
             <div className="panel">
@@ -20,7 +17,7 @@ export default function Poster(details: any): JSX.Element {
                 )}
 
                 <div className="name">
-                    <span>{details.data.title}<em>({details.data.original_language})</em></span>
+                    <span>{details.data.title || details.data.name}<em>({details.data.original_language})</em></span>
                     <div className="info">
                         <em></em>
                         {details.data.vote_average}
