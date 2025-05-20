@@ -9,11 +9,16 @@ import { getGenreColors } from '~/utils/genres';
 
 /* React */
 import type { JSX } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
 export default function Header({ data, type }: HeaderProps): JSX.Element {
+    const location = useLocation();
+    const pathParts = location.pathname.split('/').filter(Boolean); // removes empty strings
+
+    const baseSegment = pathParts[0];
+
     const tagline =
         typeof data?.tagline === 'string' && data.tagline.trim() !== ''
             ? data.tagline
@@ -42,19 +47,42 @@ export default function Header({ data, type }: HeaderProps): JSX.Element {
         );
     };
 
-    const getBackgroundImage = (data: any): string | undefined => {
+    const getBackgroundImage = (data: any): string => {
+        const baseURL = 'https://image.tmdb.org/t/p/original';
+
+        let selectedProfile;
+        if (Array.isArray(data.images?.profiles) && data.images.profiles.length > 0) {
+            const idealAspect = 16 / 9;
+
+            const scoredProfiles = data.images.profiles
+                .map(p => {
+                    const aspectDiff = Math.abs(p.aspect_ratio - idealAspect);
+                    const resolutionScore = p.width * p.height;
+                    const score = (1 / (aspectDiff + 0.01)) * Math.log(resolutionScore); // small fudge to avoid div by 0
+                    return { ...p, score };
+                })
+                .sort((a, b) => b.score - a.score);
+
+            if (scoredProfiles.length > 0) {
+                selectedProfile = `${baseURL}${scoredProfiles[0].file_path}`;
+            }
+        }
+
         const paths = [
-            data.profile_path && `https://image.tmdb.org/t/p/original${data.profile_path}`,
-            data.details?.backdrop_path && `https://image.tmdb.org/t/p/original${data.details.backdrop_path}`,
-            data.details?.background && `https://image.tmdb.org/t/p/original${data.details.background}`,
-            data.background && `https://image.tmdb.org/t/p/original${data.background}`,
-            data.backdrop_path && `https://image.tmdb.org/t/p/original${data.backdrop_path}`,
+            selectedProfile,
+            data.profile_path && `${baseURL}${data.profile_path}`,
+            data.details?.backdrop_path && `${baseURL}${data.details.backdrop_path}`,
+            data.details?.background && `${baseURL}${data.details.background}`,
+            data.background && `${baseURL}${data.background}`,
+            data.backdrop_path && `${baseURL}${data.backdrop_path}`,
             data.banner
         ];
 
-        const url = paths.find(Boolean);
-        return url ? `url(${url})` : undefined;
+        const found = paths.find(Boolean);
+        return found ? `url(${found})` : '';
     };
+
+
 
     const getLinkPath = (type: string, data: any): string => {
         if (type === 'cast') return `/cast/${data.id}`;
@@ -84,7 +112,7 @@ export default function Header({ data, type }: HeaderProps): JSX.Element {
     );
 
     return (
-        <header className={`${asideData.length > 0 ? 'has-media' : ''}`}>
+        <header className={`${baseSegment} ${asideData.length > 0 ? 'has-media' : ''}`}>
             <section style={{ backgroundImage: getBackgroundImage(data) }}>
                 <div className="detail">
                     <h1>{data.name || data.original_name || data.title}</h1>
