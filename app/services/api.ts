@@ -7,6 +7,7 @@ const headers = {
 /* Context */
 import type { UserCreate } from '~/interfaces/UserContext.interface';
 
+// Can most likely make a majority of these calls generic
 const api = {
     async searchTV(type: string, query: string, page: number): Promise<any> {
         try {
@@ -50,6 +51,20 @@ const api = {
             return null;
         }
     },
+    async getSeasonDetails(id: number, season: number): Promise<any> {
+        try {
+            const res = await fetch(`${API_URL}/movies/season/${id}/${season}/`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.error('API error in genres:', err);
+            return null;
+        }
+    },
     async getTrending(): Promise<any> {
         try {
             const res = await fetch(`${API_URL}/movies/trending/`, {
@@ -69,6 +84,24 @@ const api = {
             const res = await fetch(`${API_URL}/cast/${id}`, {
                 method: 'GET',
                 headers: headers
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.error('API error in genres:', err);
+            return null;
+        }
+    },
+    // note to self, this is okay for the account page, but i should make another call just for communities
+    async getUserProfile(jwt: any): Promise<any> {
+        try {
+            const res = await fetch(`${API_URL}/user/profile/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`,
+                },
             });
 
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);

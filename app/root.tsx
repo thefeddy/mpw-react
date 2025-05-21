@@ -104,12 +104,24 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     const [randomQuote, setRandomQuote] = useState(Object.values(errorQuotes)[0]);
 
     useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * Object.keys(errorQuotes).length);
-        setRandomQuote(Object.values(errorQuotes)[randomIndex]);
-    }, []);
+        let statusCode = 'any';
+
+        if (isRouteErrorResponse(error)) {
+            statusCode = String(error.status);
+        }
+
+        const matchingQuotes = Object.values(errorQuotes).filter(q =>
+            q.tags.includes(statusCode) || q.tags.includes('any')
+        );
+
+        if (matchingQuotes.length > 0) {
+            const selected = matchingQuotes[Math.floor(Math.random() * matchingQuotes.length)];
+            setRandomQuote(selected);
+        }
+    }, [error]);
 
     if (isRouteErrorResponse(error)) {
-        message = error.status === 404 ? "404" : "Error";
+        message = String(error.status);
         details =
             error.status === 404
                 ? "Uh, excuse me, what are ya doing here?!"
@@ -126,7 +138,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
             <img src="/img/mpw.png" />
             <h1>{message}</h1>
 
-            <blockquote className="error-quote">
+            <blockquote className="error-quote" style={{ textAlign: 'center' }}>
                 <p>"{randomQuote.quote}"</p>
                 <footer>— {randomQuote.description}</footer>
             </blockquote>

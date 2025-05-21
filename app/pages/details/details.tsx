@@ -14,6 +14,7 @@ import { createDefaultMediaDetail } from '~/interfaces/defaults';
 
 /* React */
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
@@ -53,11 +54,13 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                             <div className="episodes">
                                 {details.seasons.map((season) => (
                                     season.poster_path && (
-                                        <img
-                                            key={season.id}
-                                            src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
-                                            alt={season.name}
-                                        />
+                                        <Link to={`/season/${id}/${season.season_number}`} key={season.id}>
+                                            <img
+                                                key={season.id}
+                                                src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
+                                                alt={season.name}
+                                            />
+                                        </Link>
                                     )
                                 ))}
                             </div>
@@ -86,10 +89,9 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
                             <li>Status : {details.status}</li>
                             <li>Runtime : {details.runtime} Minutes</li>
                         </ul>
-
-                        <h1>Streams</h1>
-                        {details.streams?.rent.length > 0 && (<RenderStreamList label="Rent" streams={details.streams?.rent} />)}
-                        {details.streams?.buy.length > 0 && (<RenderStreamList label="Buy" streams={details.streams?.buy} />)}
+                        {details.streams?.rent?.length > 0 && details.streams?.buy?.length > 0 && (<h1>Streams</h1>)}
+                        {details.streams?.rent?.length > 0 && (<RenderStreamList label="Rent" streams={details.streams?.rent} />)}
+                        {details.streams?.buy?.length > 0 && (<RenderStreamList label="Buy" streams={details.streams?.buy} />)}
                     </div>
                 </div>
             </section >

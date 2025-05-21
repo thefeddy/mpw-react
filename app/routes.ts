@@ -10,5 +10,6 @@ export default [
     route('signup', 'routes/signup.tsx'),
     route('search/:type/:query/:page', 'routes/search.tsx'),
     route('details/:type/:id', 'routes/details.tsx'),
-    route('cast/:id', 'routes/cast.tsx')
+    route('cast/:id', 'routes/cast.tsx'),
+    route('season/:id/:season', 'routes/season.tsx')
 ] satisfies RouteConfig;
