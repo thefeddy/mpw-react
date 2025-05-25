@@ -1,4 +1,4 @@
 export interface HeaderProps {
     data: any;
-    type: string;
+    side_type: string;
 }

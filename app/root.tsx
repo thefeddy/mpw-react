@@ -82,6 +82,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </head>
             <body>
                 <UserProvider>
+                    <div id="desktop">
+                        <img src="/img/mpw.png" />
+                        <h1>Mobile is being worked on, sorry for the delay</h1>
+                        <LinesBG />
+                    </div>
                     <Navigation />
                     {children}
                     <ScrollRestoration />

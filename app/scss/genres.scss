@@ -1,0 +1,40 @@
+$genres: (
+    action: (#e5771e, #bb3f03),
+    adventure: (#d4a017, #b38600),
+    action-and-adventure: (#d35400, #a04000),
+    animation: (#ffb142, #e08728),
+    comedy: (#ffda79, #cfa727),
+    crime: (#9b111e, #7c0b14),
+    documentary: (#7dcea0, #4caf50),
+    drama: (#a569bd, #8e44ad),
+    family: (#ffb3b3, #e57373),
+    fantasy: (#3b5998, #2c3e50),
+    history: (#cd7f32, #a0522d),
+    horror: (#4a235a, #2e1a33),
+    music: (#ff6f61, #c74c39),
+    mystery: (#34495e, #2c3e50),
+    romance: (#e75480, #c74360),
+    science-fiction: (#16a085, #0e6655),
+    sci-fi-and-fantasy: (#1abc9c, #117a65),
+    tv-movie: (#f39c12, #d68910),
+    thriller: (#9b59b6, #7d3c98),
+    war: (#5d6d7e, #34495e),
+    western: (#a0522d, #8b4513),
+    kids: (#f5b041, #ca6f1e),
+    news: (#3498db, #2e86c1),
+    reality: (#ec7063, #c0392b),
+    soap: (#f1948a, #cd6155),
+    talk: (#58d68d, #28b463),
+    war-and-politics: (#566573, #2c3e50)
+);
+
+@function genre-colors($genre-name) {
+    @return map-get($genres, $genre-name);
+}
+
+.genre--action {
+    background-color: nth($colors, 1);
+    box-shadow: 0 2px 4px nth($colors, 2);
+
+    $colors: genre-colors(action);
+}

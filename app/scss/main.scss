@@ -99,3 +99,40 @@ main {
         }
     }
 }
+
+#desktop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #desktop {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+
+        display: grid;
+
+        width: 100vw;
+        height: 100vh;
+
+        background: #fffceb;
+
+        place-content: center;
+
+        img {
+            position: relative;
+            z-index: 10;
+
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            position: relative;
+            z-index: 10;
+
+            color: #000;
+        }
+    }
+}

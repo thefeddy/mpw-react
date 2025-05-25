@@ -6,7 +6,6 @@ import type { JSX } from 'react'
 
 
 export default function Poster(details: any): JSX.Element {
-    console.log(details);
     return (
         <>
             <div className="panel">

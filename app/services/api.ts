@@ -25,7 +25,7 @@ const api = {
     },
     async getGenres(): Promise<any> {
         try {
-            const res = await fetch(`${API_URL}/movies/genres/`, {
+            const res = await fetch(`${API_URL}/media/genres/`, {
                 method: 'GET',
                 headers: headers
             });
@@ -39,7 +39,7 @@ const api = {
     },
     async getDetails(type: string, id: string): Promise<any> {
         try {
-            const res = await fetch(`${API_URL}/movies/details/${type}/${id}/`, {
+            const res = await fetch(`${API_URL}/media/details/${type}/${id}/`, {
                 method: 'GET',
                 headers: headers
             });
@@ -53,7 +53,7 @@ const api = {
     },
     async getSeasonDetails(id: number, season: number): Promise<any> {
         try {
-            const res = await fetch(`${API_URL}/movies/season/${id}/${season}/`, {
+            const res = await fetch(`${API_URL}/media/season/${id}/${season}/`, {
                 method: 'GET',
                 headers: headers
             });
@@ -67,7 +67,7 @@ const api = {
     },
     async getTrending(): Promise<any> {
         try {
-            const res = await fetch(`${API_URL}/movies/trending/`, {
+            const res = await fetch(`${API_URL}/media/trending/`, {
                 method: 'GET',
                 headers: headers
             });

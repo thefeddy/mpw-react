@@ -48,52 +48,48 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
             <Header data={details} type="cast" />
 
             <section id="details">
-                <div className="container">
-                    <aside>
-                        {details.seasons?.length > 0 && (
-                            <div className="episodes">
-                                {details.seasons.map((season) => (
-                                    season.poster_path && (
-                                        <Link to={`/season/${id}/${season.season_number}`} key={season.id}>
-                                            <img
-                                                key={season.id}
-                                                src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
-                                                alt={season.name}
-                                            />
-                                        </Link>
-                                    )
-                                ))}
-                            </div>
-                        )}
-                        <div className="trailers">
-                            {details.trailers?.youtube
-                                .filter((trailer) => trailer.type === 'Trailer')
-                                .map((trailer) => (
-                                    <div className="trailer" key={trailer.source}>
-                                        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${trailer.source}`}></iframe>
-                                    </div>
-                                ))}
-                        </div>
-                    </aside>
-                    {/* Need to design this */}
-                    <div id="info">
-                        <h1>Information</h1>
-                        <p>{details.overview}</p>
-                        <br />
-                        <a href={`https://www.imdb.com/title/${details.imdb_id}`} target="_blank" rel="noopener noreferrer">
-                            IMDb Link
-                        </a>
-                        <br />
-                        <br />
-                        <ul>
-                            <li>Status : {details.status}</li>
-                            <li>Runtime : {details.runtime} Minutes</li>
-                        </ul>
-                        {details.streams?.rent?.length > 0 && details.streams?.buy?.length > 0 && (<h1>Streams</h1>)}
-                        {details.streams?.rent?.length > 0 && (<RenderStreamList label="Rent" streams={details.streams?.rent} />)}
-                        {details.streams?.buy?.length > 0 && (<RenderStreamList label="Buy" streams={details.streams?.buy} />)}
+                <h1>Information</h1>
+                <p>{details.overview}</p>
+
+                {details.seasons?.length > 0 && (
+                    <div className="episodes">
+                        {details.seasons.map((season) => (
+                            season.poster_path && (
+                                <Link to={`/season/${id}/${season.season_number}`} key={season.id}>
+                                    <img
+                                        key={season.id}
+                                        src={`https://image.tmdb.org/t/p/original${season.poster_path}`}
+                                        alt={season.name}
+                                    />
+                                </Link>
+                            )
+                        ))}
                     </div>
+                )}
+                <div className="trailers">
+                    {details.trailers?.youtube
+                        .filter((trailer) => trailer.type === 'Trailer')
+                        .map((trailer) => (
+                            <div className="trailer" key={trailer.source}>
+                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${trailer.source}`}></iframe>
+                            </div>
+                        ))}
                 </div>
+
+                <aside>
+                    <a href={`https://www.imdb.com/title/${details.imdb_id}`} target="_blank" rel="noopener noreferrer">
+                        IMDb Link
+                    </a>
+                    <br />
+                    <ul>
+                        <li>Status : {details.status}</li>
+                        <li>Runtime : {details.runtime} Minutes</li>
+                    </ul>
+                    {details.streams?.rent?.length > 0 || details.streams?.buy?.length > 0 && (<h1>Streams</h1>)}
+                    {details.streams?.rent?.length > 0 && (<RenderStreamList label="Rent" streams={details.streams?.rent} />)}
+                    {details.streams?.buy?.length > 0 && (<RenderStreamList label="Buy" streams={details.streams?.buy} />)}
+                </aside>
+
             </section >
         </main >
     );

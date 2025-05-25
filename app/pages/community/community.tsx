@@ -1,41 +1,44 @@
-/* SCSS */
+/* 🎨 Styles */
 import './style.scss';
 
-/* Components */
+/* 🧩 Components */
 import LinesBG from '~/components/LinesBG/LinesBG';
 import Modal from '~/components/Modal/Modal';
 import Poster from '~/components/Poster/Poster';
 import Header from '~/components/Header/Header';
 
-/* Services */
+/* 🛰️ Services */
 import communities from '~/services/communities';
 
-/* Interfaces */
+/* 🧾 Interfaces & Types */
 import type { Community, CommunityScreenProps } from '~/interfaces/Communities.interface';
 interface PasscodeFormProps {
     passcode: string | null;
     setPasscode: (value: string | null) => void;
 }
 
-/* React */
-import { useState, useEffect, useCallback } from 'react';
+/* ⚛️ React */
+import { useState, useEffect, useCallback, useRef } from 'react';
 
-/* libs */
-import { format } from "date-fns";
+/* 📚 Libraries */
+import { format } from 'date-fns';
 import { Link, useNavigate } from 'react-router';
 
 export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
 
+    // 🔗 Refs
+    const dialog = useRef<HTMLDivElement | null>(null);
+
     // 🏷️ State Management
     const [details, setDetails] = useState<Community | null>(null);
-    const [watchedMovies, setWatchedMovies] = useState();
-    const [unwatchedMovies, setUnwatchedMovies] = useState();
+    const [watchedMedia, setWatchedMedia] = useState();
+    const [unwatchedMedia, setUnwatchedMedia] = useState();
     const [passcode, setPasscode] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [refresh, setRefresh] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
-    // Navigate
+    // 🧭 Navigate
     const navigate = useNavigate();
 
     // 🔄 Fetch Data Logic
@@ -46,25 +49,31 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
             const data = await communities.getCommunitiesById(Number(id));
             console.log(data);
             if (data && data.id) {
-                const watchedMovies = data.movies
-                    .filter((movie: any) => movie.watched_on !== null)
-                    .map(({ details, ...rest }) => ({
-                        ...rest,
-                        ...details,
-                    }));
+                const watchedMedia = data.media
+                    .filter((media: any) => media.watched_on !== null)
+                    .map(({ details, ...rest }) => {
+                        const { type: _ignored, ...safeDetails } = details;
+                        return {
+                            ...rest,
+                            ...safeDetails,
+                        };
+                    });
 
-                const unwatchedMovies = data.movies
-                    .filter((movie: any) => movie.watched_on === null)
-                    .map(({ details, ...rest }) => ({
-                        ...rest,
-                        ...details,
-                    }));
+                const unwatchedMedia = data.media
+                    .filter((media: any) => media.watched_on === null)
+                    .map(({ details, ...rest }) => {
+                        const { type: _ignored, ...safeDetails } = details;
+                        return {
+                            ...rest,
+                            ...safeDetails,
+                        };
+                    });
 
 
                 data.created = format(data.created, 'yyyy-MM-dd');
                 setDetails(data);
-                setWatchedMovies(watchedMovies);
-                setUnwatchedMovies(unwatchedMovies);
+                setWatchedMedia(watchedMedia);
+                setUnwatchedMedia(unwatchedMedia);
             }
 
             if (!data) {
@@ -118,7 +127,7 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
     // ➕ Join Community
     const joinCommunity = async (communityId: number, priv: boolean) => {
         if (priv) {
-            const dialog = document.querySelector('dialog');
+
             setIsOpen(true)
         }
     };
@@ -163,25 +172,25 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
             <main className="community-details">
                 <Header data={details} type="movie" />
                 <section id="results">
-                    {watchedMovies?.length > 0 && (
+                    {watchedMedia?.length > 0 && (
                         <>
-                            <h1>Watched Movies</h1>
+                            <h1>Watched</h1>
                             <div className="list">
-                                {watchedMovies?.map((movie: any) => (
-                                    <Link key={movie.id} to={`/details/movie/${movie.movie_id}`}>
-                                        <Poster data={movie} />
+                                {watchedMedia?.map((media: any) => (
+                                    <Link key={media.id} to={`/details/${media.type}/${media.media_id}`}>
+                                        <Poster data={media} />
                                     </Link>
                                 ))}
                             </div>
                         </>
                     )}
-                    {unwatchedMovies?.length > 0 && (
+                    {unwatchedMedia?.length > 0 && (
                         <>
-                            <h1>Unwatched Movies</h1>
+                            <h1>Unwatched</h1>
                             <div className="list">
-                                {unwatchedMovies?.map((movie: any) => (
-                                    <Link key={movie.id} to={`/details/movie/${movie.movie_id}`}>
-                                        <Poster data={movie} />
+                                {unwatchedMedia?.map((media: any) => (
+                                    <Link key={media.id} to={`/details/${media.type}/${media.media_id}`}>
+                                        <Poster data={media} />
                                     </Link>
                                 ))}
                             </div>

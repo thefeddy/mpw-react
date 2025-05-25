@@ -6,31 +6,31 @@ import type { HeaderProps } from './types';
 
 /* Services */
 import api from '~/services/api';
-
+import community from '~/services/communities';
 /* Utils */
 import { getGenreColors } from '~/utils/genres';
 
 /* React */
 import { useEffect, useState, type JSX } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useUser } from '~/context/UserContext';
 
 
 
-export default function Header({ data, type }: HeaderProps): JSX.Element {
+export default function Header({ data, side_type }: HeaderProps): JSX.Element {
     const { token } = useUser();
+    const { id, type } = useParams();
 
 
     // 🏷️ State Management
-
     const [options, setOptions] = useState<string[]>([]);
     const [selected, setSelected] = useState('');
-
 
     const location = useLocation();
     const pathParts = location.pathname.split('/').filter(Boolean); // removes empty strings
 
     const baseSegment = pathParts[0];
+
     const tagline =
         typeof data?.tagline === 'string' && data.tagline.trim() !== ''
             ? data.tagline
@@ -105,8 +105,8 @@ export default function Header({ data, type }: HeaderProps): JSX.Element {
 
 
     const getLinkPath = (type: string, data: any): string => {
-        if (type === 'cast') return `/cast/${data.id}`;
-        return `/details/${type}/${data.movie_id || data.id}`;
+        if (side_type === 'cast') return `/cast/${data.id}`;
+        return `/details/${side_type}/${data.movie_id || data.id}`;
     };
 
     const renderGenres = () => (
@@ -162,17 +162,32 @@ export default function Header({ data, type }: HeaderProps): JSX.Element {
     }, []);
 
     useEffect(() => {
-        console.log('Selected changed:', selected);
+
+        let media = Number(selected);
+
+        const fetchResults = async () => {
+            try {
+                const data = await community.addMedia(media, Number(id), type);
+
+            } catch (error) {
+                console.error("Error fetching results:", error);
+            }
+        }
+
+        if (media != 0) {
+            fetchResults();
+        }
+
     }, [selected]);
 
 
     return (
         <header className={`${baseSegment} ${asideData?.length > 0 ? 'has-media' : ''}`}>
             <section style={{ backgroundImage: getBackgroundImage(data) }}>
-                {baseSegment !== 'communities' && renderSelectMenu()}
+                {baseSegment !== 'community' && baseSegment !== 'cast' && renderSelectMenu()}
                 <div className="detail">
                     <h1>{data.name || data.original_name || data.title}</h1>
-                    <h2>{tagline}</h2>
+                    {tagline && (<h2>{tagline}</h2>)}
                     {Array.isArray(data.genres) && data.genres.length > 0 && renderGenres()}
                 </div>
             </section>

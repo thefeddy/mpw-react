@@ -84,6 +84,25 @@ const communities = {
             console.error('API error in searchMovies:', err);
             return null;
         }
+    },
+    async addMedia(community_id: number, media_id: number, type: string): Promise<any> {
+        try {
+            const JWT = getJWT();
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JWT}`,
+            };
+            const res = await fetch(`${API_URL}/community/${community_id}/add/${type}/${media_id}`, {
+                method: 'PATCH',
+                headers: headers
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            console.error('API error in searchMovies:', err);
+            return null;
+        }
     }
 };
 
