@@ -1,4 +1,6 @@
-    header {
+@use '/app/scss/genres.scss';
+
+header {
     display: flex;
     overflow: hidden;
 
@@ -303,6 +305,21 @@
                     background-size: cover;
                 }
             }
+        }
+    }
+
+    .extra {
+        position: absolute;
+        z-index: 10;
+        top: 150px;
+        left: 0;
+
+
+        button {
+            font-size: 18px;
+
+            width: 30px;
+            height: 30px;
         }
     }
 }

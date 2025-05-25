@@ -31,10 +31,3 @@ $genres: (
 @function genre-colors($genre-name) {
     @return map-get($genres, $genre-name);
 }
-
-.genre--action {
-    background-color: nth($colors, 1);
-    box-shadow: 0 2px 4px nth($colors, 2);
-
-    $colors: genre-colors(action);
-}

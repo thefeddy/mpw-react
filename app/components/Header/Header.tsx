@@ -18,12 +18,9 @@ import { useUser } from '~/context/UserContext';
 
 
 export default function Header({ data, side_type }: HeaderProps): JSX.Element {
-
-    console.log(data);
     const { token } = useUser();
     const { id, type } = useParams();
 
-    console.log(side_type);
     // 🏷️ State Management
     const [options, setOptions] = useState<string[]>([]);
     const [selected, setSelected] = useState('');
@@ -86,8 +83,8 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
                 selectedProfile = `${baseURL}${scoredProfiles[0].file_path}`;
             }
         }
-        let randomStill = 0;
 
+        let randomStill = 0;
         if (data.stills) {
             const totalEpisodes = data.stills.length || 1;
             randomStill = Math.floor(Math.random() * totalEpisodes);
@@ -193,6 +190,9 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
 
     return (
         <header className={`${baseSegment} ${asideData?.length > 0 ? 'has-media' : ''}`}>
+            <div className="extra">
+                <button>+</button>
+            </div>
             <section style={{ backgroundImage: getBackgroundImage(data) }}>
                 {baseSegment !== 'community' && baseSegment !== 'cast' && renderSelectMenu()}
                 <div className="detail">

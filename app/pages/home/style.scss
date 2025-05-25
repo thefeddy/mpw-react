@@ -1,4 +1,4 @@
-searching {
+.searching {
     position: relative;
     z-index: 10;
 
@@ -17,7 +17,7 @@ searching {
         margin: 0 auto 25px auto;
     }
 
-    search {
+    .search {
         position: relative;
 
         width: 800px;
@@ -78,17 +78,15 @@ searching {
     }
 }
 
-radios {
+.radios {
     display: flex;
 
     margin-top: 25px;
 
     justify-content: center;
 
-    radio {
+    .radio {
         display: flex;
-
-
 
         &:first-child {
             margin-right: 25px;
