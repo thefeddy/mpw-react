@@ -18,10 +18,12 @@ import { useUser } from '~/context/UserContext';
 
 
 export default function Header({ data, side_type }: HeaderProps): JSX.Element {
+
+
     const { token } = useUser();
     const { id, type } = useParams();
 
-
+    console.log(side_type);
     // 🏷️ State Management
     const [options, setOptions] = useState<string[]>([]);
     const [selected, setSelected] = useState('');
@@ -167,7 +169,7 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
 
         const fetchResults = async () => {
             try {
-                const data = await community.addMedia(media, Number(id), type);
+                const data = await community.addMedia(media, Number(id), side_type);
 
             } catch (error) {
                 console.error("Error fetching results:", error);
@@ -199,7 +201,7 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
                         .map((data: any) => (
                             <li key={data.id} className={`item ${!getBackgroundImage(data) ? 'default-background' : ''}`}
                                 style={getBackgroundImage(data) ? { backgroundImage: getBackgroundImage(data) } : {}}>
-                                <Link to={getLinkPath(type, data)}>
+                                <Link to={getLinkPath(side_type, data)}>
                                     <div className="details">
                                         <p>{getDisplayTitle(data)}</p>
                                         <span>{getTagLine(data)}</span>

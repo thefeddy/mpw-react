@@ -49,25 +49,11 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
             const data = await communities.getCommunitiesById(Number(id));
             console.log(data);
             if (data && data.id) {
-                const watchedMedia = data.media
-                    .filter((media: any) => media.watched_on !== null)
-                    .map(({ details, ...rest }) => {
-                        const { type: _ignored, ...safeDetails } = details;
-                        return {
-                            ...rest,
-                            ...safeDetails,
-                        };
-                    });
+                const watchedMedia = data.media.filter(m => m.watched_on !== null);
+                const unwatchedMedia = data.media.filter(m => m.watched_on === null);
 
-                const unwatchedMedia = data.media
-                    .filter((media: any) => media.watched_on === null)
-                    .map(({ details, ...rest }) => {
-                        const { type: _ignored, ...safeDetails } = details;
-                        return {
-                            ...rest,
-                            ...safeDetails,
-                        };
-                    });
+
+                console.log(unwatchedMedia);
 
 
                 data.created = format(data.created, 'yyyy-MM-dd');
@@ -177,7 +163,7 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
                             <h1>Watched</h1>
                             <div className="list">
                                 {watchedMedia?.map((media: any) => (
-                                    <Link key={media.id} to={`/details/${media.type}/${media.media_id}`}>
+                                    <Link key={media.media_id} to={`/details/${media.type}/${media.media_id}`}>
                                         <Poster data={media} />
                                     </Link>
                                 ))}
@@ -189,8 +175,8 @@ export const CommunityScreen: React.FC<CommunityScreenProps> = ({ id }) => {
                             <h1>Unwatched</h1>
                             <div className="list">
                                 {unwatchedMedia?.map((media: any) => (
-                                    <Link key={media.id} to={`/details/${media.type}/${media.media_id}`}>
-                                        <Poster data={media} />
+                                    <Link key={media.media_id} to={`/details/${media.type}/${media.media_id}`}>
+                                        <Poster data={media.details} />
                                     </Link>
                                 ))}
                             </div>

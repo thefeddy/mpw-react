@@ -45,7 +45,7 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id }) => {
 
     return (
         <main id="media-details">
-            <Header data={details} type="cast" />
+            <Header data={details} side_type="cast" />
 
             <section id="details">
                 <h1>Information</h1>

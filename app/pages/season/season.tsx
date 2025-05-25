@@ -53,7 +53,7 @@ export const SeasonScreen: React.FC<SeasonScreenProps> = ({ id, season }) => {
     // ✅ Render
     return (
         <>
-            <Header data={details} type="movie" />
+            <Header data={details} side_type="episode" />
         </>
     );
 };

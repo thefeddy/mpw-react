@@ -52,7 +52,7 @@ export const CastScreen: React.FC<CastScreenProps> = ({ id }) => {
     // ✅ Render
     return (
         <>
-            <Header data={details} type="movie" />
+            <Header data={details} side_type="movie" />
         </>
     );
 };
