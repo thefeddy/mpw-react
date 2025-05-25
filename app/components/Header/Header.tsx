@@ -19,7 +19,7 @@ import { useUser } from '~/context/UserContext';
 
 export default function Header({ data, side_type }: HeaderProps): JSX.Element {
 
-
+    console.log(data);
     const { token } = useUser();
     const { id, type } = useParams();
 
@@ -42,7 +42,7 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
 
     const asideData = [
         ...(data.credits?.cast || []),
-        ...(data.movies || []),
+        ...(data.media || []),
         ...(data.episodes || [])
     ];
 
@@ -114,9 +114,9 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
 
 
 
-    const getLinkPath = (type: string, data: any): string => {
+    const getLinkPath = (data: any): string => {
         if (side_type === 'cast') return `/cast/${data.id}`;
-        return `/details/${side_type}/${data.movie_id || data.id}`;
+        return `/details/${data.type}/${data.media_id || data.id}`;
     };
 
     const renderGenres = () => (
@@ -177,7 +177,7 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
 
         const fetchResults = async () => {
             try {
-                const data = await community.addMedia(media, Number(id), side_type);
+                const data = await community.addMedia(media, Number(id), type);
 
             } catch (error) {
                 console.error("Error fetching results:", error);
@@ -209,7 +209,7 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
                         .map((data: any) => (
                             <li key={data.id} className={`item ${!getBackgroundImage(data) ? 'default-background' : ''}`}
                                 style={getBackgroundImage(data) ? { backgroundImage: getBackgroundImage(data) } : {}}>
-                                <Link to={getLinkPath(side_type, data)}>
+                                <Link to={getLinkPath(data)}>
                                     <div className="details">
                                         <p>{getDisplayTitle(data)}</p>
                                         <span>{getTagLine(data)}</span>
