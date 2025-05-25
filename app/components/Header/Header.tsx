@@ -86,16 +86,24 @@ export default function Header({ data, side_type }: HeaderProps): JSX.Element {
                 selectedProfile = `${baseURL}${scoredProfiles[0].file_path}`;
             }
         }
+        let randomStill = 0;
+
+        if (data.stills) {
+            const totalEpisodes = data.stills.length || 1;
+            randomStill = Math.floor(Math.random() * totalEpisodes);
+        }
 
         const paths = [
             selectedProfile,
+            data.stills && `${baseURL}${data.stills[randomStill].file_path}`,
+            data.still_path && `${baseURL}${data.still_path}`,
             data.profile_path && `${baseURL}${data.profile_path}`,
             data.details?.backdrop_path && `${baseURL}${data.details.backdrop_path}`,
             data.details?.background && `${baseURL}${data.details.background}`,
             data.background && `${baseURL}${data.background}`,
             data.backdrop_path && `${baseURL}${data.backdrop_path}`,
             data.banner,
-            data.still_path && `${baseURL}${data.still_path}`,
+
             data.poster_path && `${baseURL}${data.poster_path}`,
 
         ];
