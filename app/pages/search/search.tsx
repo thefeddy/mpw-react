@@ -28,11 +28,9 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page })
             try {
                 const data = await api.searchTV(type, query, pageNumber);
                 if (data && data.results) {
-                    console.log(typeof data.results.results)
-                    setResults(data.results.results);
-                    setTotalResults(data.results.total_results);
-                    setTotalPages(data.results.total_pages)
-                    console.log(data.results)
+                    setResults(data.results);
+                    setTotalResults(data.results.length);
+                    setTotalPages(data.pagination.total)
                 }
             } catch (error) {
                 console.error("Error fetching results:", error);
@@ -60,6 +58,7 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page })
                         <p>No results found</p>
                     )}
                 </div>
+                {totalPages}
                 {totalPages > 1 && (
                     <div className="pagination">
                         {[...Array(totalPages)].map((_, index) => (

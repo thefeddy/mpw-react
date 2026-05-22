@@ -21,11 +21,6 @@ nav {
         position: sticky;
     }
 
-    #login {
-        margin-left: auto;
-    }
-
-
     a {
         font-family: 'Poppins';
         font-size: 14px;
@@ -55,9 +50,15 @@ nav {
     ul {
         display: flex;
 
+        width: 100%;
         padding: 0;
 
         list-style: none;
+
+        #login {
+            margin-right: 25px;
+            margin-left: auto;
+        }
 
         span {
             font-family: 'Poppins';
