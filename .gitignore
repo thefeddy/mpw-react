@@ -38,3 +38,4 @@ ngrok.exe
 # React Router
 /.react-router/
 /build/
+.backup-code

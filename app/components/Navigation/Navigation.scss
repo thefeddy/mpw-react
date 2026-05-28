@@ -1,6 +1,4 @@
 nav {
-    font-family: 'Poppins';
-
     position: fixed;
     z-index: 20;
     top: 0;
@@ -22,7 +20,6 @@ nav {
     }
 
     a {
-        font-family: 'Poppins';
         font-size: 14px;
         font-weight: 500;
 
@@ -36,12 +33,18 @@ nav {
         letter-spacing: 1px;
 
         color: #fff;
-        border: none;
+        border: 1px solid #000;
         outline: none;
         background: #e5771e;
         box-shadow: 5px 5px #bb3f03;
 
         appearance: none;
+
+        &:active {
+            transform: translate(3px, 3px);
+
+            box-shadow: 2px 2px 0 #000;
+        }
     }
 
 
@@ -58,10 +61,18 @@ nav {
         #login {
             margin-right: 25px;
             margin-left: auto;
+
+            .user-profile-widget {
+                display: flex;
+
+                .user-name {
+                    background-color: rgb(155, 89, 182);
+                    box-shadow: rgb(125, 60, 152) 5px 5px;
+                }
+            }
         }
 
         span {
-            font-family: 'Poppins';
             font-size: 14px;
             font-weight: 500;
 
@@ -85,7 +96,6 @@ nav {
     }
 
     p {
-        font-family: 'Poppins';
         font-size: 20px;
         font-weight: 500;
 

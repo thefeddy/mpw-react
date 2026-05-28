@@ -36,6 +36,7 @@ export function TrendingScreen() {
 
         fetchResults();
     }, []);
+
     return (
         <main>
             <section id="results" className="trending">

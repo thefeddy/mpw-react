@@ -1,0 +1,46 @@
+@use '/app/scss/genres' as *;
+
+.genre-badge {
+    font-size: 18px;
+    font-weight: 700;
+
+    display: inline-flex;
+
+    height: 35px;
+    margin-right: 15px;
+    padding: 0 20px;
+
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    color: #fff;
+    border: 1px solid #000;
+    outline: none;
+    background: #807c4c;
+    box-shadow: 5px 5px 0 #000;
+
+    align-items: center;
+    justify-content: center;
+
+    &:active {
+        transform: translate(3px, 3px);
+
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    @each $name, $colors in $genres {
+        &[data-genre='#{$name}'] {
+            background: nth($colors, 1);
+            box-shadow: 5px 5px 0 nth($colors, 2);
+
+            @if $name =='comedy' or $name =='animation' or $name =='science-fiction' or $name =='adventure' or $name =='kids' or $name =='talk' {
+                color: #000;
+            }
+
+            @else {
+                color: #fff;
+            }
+        }
+    }
+}

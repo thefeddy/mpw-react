@@ -35,7 +35,6 @@ const communities = {
     getCommunitiesById: (id: number) =>
         communityRequest(`/community/${id}`),
 
-
     leaveCommunity: (id: number) =>
         communityRequest(`/community/leave/${id}`, { method: 'DELETE' }),
 

@@ -1,4 +1,6 @@
 body {
+    font-family: 'Poppins', sans-serif;
+
     min-height: 100vh;
 
     -webkit-font-smoothing: antialiased;
@@ -36,8 +38,6 @@ main {
 
         h1,
         p {
-            font-family: 'Poppins', sans-serif;
-
             position: relative;
             z-index: 1;
 
@@ -45,7 +45,6 @@ main {
         }
 
         h1 {
-            font-family: 'Poppins', sans-serif;
             font-size: 80px;
 
             margin: 0;
@@ -71,7 +70,6 @@ main {
 
         h1,
         h2 {
-            font-family: 'Poppins';
             font-size: 24px;
             font-weight: 500;
 

@@ -31,10 +31,6 @@ import {
     Scripts,
     ScrollRestoration,
 } from "react-router";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
-
-
 
 export const links: Route.LinksFunction = () => [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -47,9 +43,11 @@ export const links: Route.LinksFunction = () => [
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&display=swap",
     },
+    {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap",
+    },
 ];
-
-
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (

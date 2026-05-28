@@ -89,9 +89,9 @@ export default function Navigation(): JSX.Element {
                                 />
                             )}
                             <span className="user-name">{user.display_name}</span>
-                            <button onClick={handleLogout} className="logout-btn">
+                            <a onClick={handleLogout} className="logout-btn">
                                 Sign Out
-                            </button>
+                            </a>
                         </div>
                     ) : (
                         <GoogleOAuthProvider clientId="721025006841-18dq69dbl92pvk4m0dc3g4f9i8efchfq.apps.googleusercontent.com">

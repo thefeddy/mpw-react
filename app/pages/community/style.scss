@@ -42,7 +42,6 @@
             margin-right: 15px;
 
             a {
-                font-family: 'Poppins';
                 font-size: 14px;
                 font-weight: 500;
 
@@ -70,8 +69,6 @@
     padding-top: 50px;
 
     .container {
-        font-family: 'Poppins', sans-serif;
-
         display: flex;
         flex-direction: row;
 
@@ -109,7 +106,6 @@
     display: flex;
 
     h3 {
-        font-family: 'Poppins', sans-serif;
         font-size: 30px;
 
         position: absolute;
@@ -187,8 +183,6 @@
 
 
                 p {
-                    font-family: 'Poppins', sans-serif;
-
                     margin: 0;
 
                     text-transform: uppercase;
@@ -197,7 +191,6 @@
                 }
 
                 span {
-                    font-family: 'Poppins', sans-serif;
                     font-size: 12px;
 
                     color: #fff;
@@ -244,13 +237,11 @@
             justify-content: space-between;
 
             p {
-                font-family: 'Poppins', sans-serif;
                 font-size: 18px;
                 line-height: 28px;
             }
 
             h1 {
-                font-family: 'Poppins', sans-serif;
                 font-size: 80px;
 
                 display: flex;
@@ -273,7 +264,6 @@
             }
 
             h2 {
-                font-family: 'Poppins', sans-serif;
                 font-size: 14px;
                 font-weight: normal;
 
@@ -281,8 +271,6 @@
             }
 
             span {
-                font-family: 'Poppins', sans-serif;
-
                 letter-spacing: 1.45px;
             }
         }
@@ -292,7 +280,6 @@
 
 .community-details {
     button {
-        font-family: 'Poppins', sans-serif;
         font-size: 14px;
         font-weight: 500;
 
@@ -328,7 +315,6 @@ dialog {
 
     input[type='text'],
     input[type='password'] {
-        font-family: 'Poppins';
         font-size: 16px;
 
         width: 500px;

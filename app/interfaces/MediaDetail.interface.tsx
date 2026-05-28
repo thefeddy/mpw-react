@@ -1,6 +1,7 @@
 export interface DetailScreenProps {
     type: string;
     id: string;
+    onDataLoaded: (title: string) => void;
 }
 
 export interface Genre {

@@ -2,7 +2,6 @@ import type { UserCreate } from '~/interfaces/UserContext.interface';
 
 const API_URL = 'http://localhost:3000/api';
 
-
 async function request<T = any>(endpoint: string, options: RequestInit = {}): Promise<T | null> {
     const url = `${API_URL}${endpoint}`;
 
@@ -45,13 +44,13 @@ const api = {
         request(`/media/season/${id}/${season}/`),
 
     getTrending: () =>
-        request('/media/trending/'),
+        request('/library/trending/'),
 
     getCast: (id: number) =>
         request(`/cast/${id}`),
 
     getUserProfile: () =>
-        request('/user/profile/'),
+        request('/users/profile/'),
 
     auth: (email: string, password: string, remember: boolean) => {
         const body = new URLSearchParams({
