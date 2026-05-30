@@ -1,4 +1,4 @@
-import type { MediaDetail } from "./MediaDetail.interface";
+import type { MediaDetail } from "../types/media";
 
 export interface CommunityOwner {
     id: string;

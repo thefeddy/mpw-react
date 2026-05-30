@@ -3,7 +3,7 @@ import { CommunitiesScreen } from '~/pages/communities/communities';
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Welcome to MPW" },
+        { title: "Welcome to The Threate" },
         { name: "description", content: "Welcome!" },
     ];
 }

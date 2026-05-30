@@ -47,7 +47,7 @@ const api = {
         request('/library/trending/'),
 
     getCast: (id: number) =>
-        request(`/cast/${id}`),
+        request(`/library/cast/${id}`),
 
     getUserProfile: () =>
         request('/users/profile/'),

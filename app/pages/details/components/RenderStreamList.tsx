@@ -5,7 +5,7 @@ import './style.scss'
 import api from '~/services/api';
 
 /* Interace */
-import type { StreamBuyRent } from '~/interfaces/MediaDetail.interface';
+import type { StreamBuyRent } from '~/types/media';
 
 interface RenderStreamListProps {
     label: string;

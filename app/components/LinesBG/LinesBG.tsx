@@ -1,7 +1,4 @@
-/* SCSS */
 import './style.scss'
-
-/* Libs */
 import type { JSX } from 'react'
 
 const COLORS: string[] = [

@@ -9,12 +9,12 @@ import LinesBG from 'app/components/LinesBG/LinesBG';
 import api from '../../services/api';
 
 /* React */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function Main() {
     const [query, setQuery] = useState('');
-    const [type, setType] = useState('movie'); // default to 'movie'
+    const [type, setType] = useState('movie');
     const navigate = useNavigate();
 
     const handleSubmit = (event: any) => {
@@ -28,7 +28,7 @@ export function Main() {
             <div className="searching">
                 <img src="/img/mpw.png" />
                 <div className="search">
-                    <form onSubmit={handleSubmit}>
+                    <form autoComplete="off" noValidate onSubmit={handleSubmit}>
                         <input type="search" placeholder="Scour for films and series, then embark on an adventure!"
                             required value={query}
                             onChange={(e) => setQuery(e.target.value)}

@@ -1,5 +1,5 @@
 import { useUser } from '~/context/UserContext';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 
 interface ProtectedLinkProps {
     to: string;
@@ -16,7 +16,7 @@ const ProtectedLink = ({ to, children }: ProtectedLinkProps) => {
         return <Navigate to="/login" />;
     }
 
-    return <Link to={to}>{children}</Link>;
+    return <NavLink to={to} className="btn-bumper">{children}</NavLink>;
 };
 
 export default ProtectedLink;

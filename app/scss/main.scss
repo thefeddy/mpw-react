@@ -11,62 +11,10 @@ body {
 main {
     min-height: 100vh;
 
-    background: #fffceb;
-
-    &#four-oh-four {
-        position: relative;
-
-        display: grid;
-
-        place-content: center;
-
-
-        pre {
-            position: relative;
-            z-index: 1;
-        }
-
-        img {
-            position: relative;
-            z-index: 1;
-
-            display: block;
-
-            width: 200px;
-            margin: 0 auto 25px auto;
-        }
-
-        h1,
-        p {
-            position: relative;
-            z-index: 1;
-
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 80px;
-
-            margin: 0;
-
-            text-transform: uppercase;
-
-            color: #fffceb;
-            text-shadow: 1px 1px 0 #937650, 3px 3px 0 #f9bd6d, 5px 5px 0 #e6842b, 7px 7px 0 #ce572c, 9px 9px 0 #807c4c, 11px 11px 0 #8c9169;
-        }
-
-        .error-quote {
-            font-size: 22px;
-
-            position: relative;
-            z-index: 1;
-
-            margin: 25px 0;
-        }
-    }
+    background: #e6d5b7;
 
     #results {
-        padding: 30px 50px 0 50px;
+        padding: 77px 50px 0 50px;
 
         h1,
         h2 {
@@ -96,41 +44,50 @@ main {
             }
         }
     }
+
+    &#cast-details {
+        header {
+            section {
+                background-position: center center;
+            }
+        }
+    }
 }
 
-#desktop {
-    display: none;
-}
+.btn-bumper {
+    font-size: 14px;
+    font-weight: 500;
 
-@media (max-width: 768px) {
-    #desktop {
-        position: fixed;
-        z-index: 1000;
-        top: 0;
-        left: 0;
+    display: inline-block;
 
-        display: grid;
+    padding: 8px;
 
-        width: 100vw;
-        height: 100vh;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
 
-        background: #fffceb;
+    color: #fff;
+    border: 1px solid #000;
+    outline: none;
+    background: #e5771e;
+    box-shadow: 5px 5px #bb3f03;
 
-        place-content: center;
+    appearance: none;
 
-        img {
-            position: relative;
-            z-index: 10;
+    &.active {
+        background: #34495e;
+        box-shadow: 5px 5px #5d6d7e;
+    }
 
-            width: 200px;
-            margin: 0 auto;
-        }
+    &:active {
+        transform: translate(3px, 3px);
 
-        h1 {
-            position: relative;
-            z-index: 10;
+        box-shadow: 2px 2px 0 #000;
+    }
 
-            color: #000;
-        }
+    &:hover {
+        background: #c74c39;
+        box-shadow: 5px 5px #ff6f61;
     }
 }

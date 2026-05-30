@@ -7,7 +7,7 @@ import ProtectedLink from '~/routes/ProtectedLink';
 /* React */
 import { useState, useEffect } from 'react';
 import type { JSX } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 /* Google Auth */
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from '@react-oauth/google';
@@ -19,10 +19,9 @@ interface UserSession {
 }
 
 export default function Navigation(): JSX.Element {
-    // 1. Manage reactive state for the user session
     const [user, setUser] = useState<UserSession | null>(null);
+    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
-    // 2. Read the existing session token or user data on initial mount
     useEffect(() => {
         const storedUser = localStorage.getItem('app_user');
         if (storedUser) {
@@ -69,32 +68,26 @@ export default function Navigation(): JSX.Element {
         <nav>
             <ul>
                 <li>
-                    <Link to={`/`}>Search</Link>
+                    <NavLink to={`/`} className="btn-bumper">Search</NavLink>
                 </li>
                 <li>
                     <ProtectedLink to={`/communities/`}>Communities</ProtectedLink>
                 </li>
                 <li>
-                    <Link to={`/trending`}>Trending</Link>
+                    <NavLink to={`/trending`} className="btn-bumper">Trending</NavLink>
                 </li>
 
                 <li id="login">
                     {user ? (
-                        <div className="user-profile-widget">
-                            {user.photo && (
-                                <img
-                                    src={user.photo}
-                                    alt={user.display_name}
-                                    className="user-avatar"
-                                />
-                            )}
-                            <span className="user-name">{user.display_name}</span>
-                            <a onClick={handleLogout} className="logout-btn">
+                        <>
+                            <NavLink to={`/profile`} className="btn-bumper username">{user.display_name}</NavLink>
+
+                            <a onClick={handleLogout} className="btn-bumper signout">
                                 Sign Out
                             </a>
-                        </div>
+                        </>
                     ) : (
-                        <GoogleOAuthProvider clientId="721025006841-18dq69dbl92pvk4m0dc3g4f9i8efchfq.apps.googleusercontent.com">
+                        <GoogleOAuthProvider clientId={googleClientId}>
                             <GoogleLogin
                                 onSuccess={handleSuccess}
                                 onError={() => console.error('Login Failed')}

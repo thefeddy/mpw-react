@@ -24,6 +24,21 @@
         height: 80px;
 
         form {
+            display: flex;
+
+            padding: 0 20px;
+
+            border: 2px solid transparent;
+            background: rgba(90, 61, 43, 0.85);
+
+            align-items: center;
+            backdrop-filter: blur(4px);
+            justify-content: center;
+
+            &:has(input:user-invalid, select:user-invalid, textarea:user-invalid) {
+                border-color: #c74c39;
+            }
+
             svg {
                 position: absolute;
                 top: 50%;
@@ -35,16 +50,14 @@
             input {
                 font-size: 16px;
 
-                width: 100%;
+                width: 90%;
                 height: 80px;
 
-                text-indent: 45px;
                 letter-spacing: 1px;
 
                 color: #fff;
                 border: none;
                 outline: none;
-                background: rgba(90, 61, 43, 0.85);
 
                 appearance: none;
             }
@@ -53,24 +66,25 @@
                 font-size: 18px;
                 font-weight: 500;
 
-                position: absolute;
-                top: 50%;
-                right: 15px;
-
                 height: 50px;
                 padding: 0 20px;
 
                 cursor: pointer;
-                transform: translateY(-50%);
                 letter-spacing: 1px;
 
                 color: #fff;
-                border: none;
+                border: 1px solid #000;
                 outline: none;
-                background: #e5771e;
-                box-shadow: 5px 5px #bb3f03;
+                background: #3498db;
+                box-shadow: 5px 5px #2e86c1;
 
                 appearance: none;
+
+                &:active {
+                    transform: translate(3px, 3px);
+
+                    box-shadow: 5px 5px 0 #000;
+                }
             }
         }
     }
@@ -84,20 +98,23 @@
     justify-content: center;
 
     .radio {
-        display: flex;
+        display: inline-flex;
+
+        justify-content: center;
 
         &:first-child {
             margin-right: 25px;
         }
 
         label {
+            font-family: 'Archivo', sans-serif;
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 900;
+            line-height: 30px;
 
-            height: 50px;
-            margin-top: 4px;
             margin-left: 10px;
 
+            cursor: pointer;
             letter-spacing: 1px;
 
             color: #000;
@@ -110,20 +127,39 @@
             height: 30px;
 
             cursor: pointer;
-            transition: all 550ms ease-in-out;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
 
             color: #fff;
-            border: none;
+            border: 2px solid #291c13;
             outline: none;
             background: #5a3d2b;
-            box-shadow: 3px 3px #937650;
+            box-shadow: 3px 3px 0 #291c13;
 
             appearance: none;
 
+            &:active {
+                transform: translate(1px, 1px);
+
+                box-shadow: 2px 2px 0 #291c13;
+            }
+
             &:checked {
-                border-color: #e5771e;
-                background-color: #e5771e;
-                box-shadow: 3px 3px #bb3f03;
+                transform: translate(3px, 3px);
+
+                background: #e6842b;
+                box-shadow: 0 0 0 #291c13;
+
+                &::after {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+
+                    width: 10px;
+                    height: 10px;
+
+                    content: '';
+                    transform: translate(-50%, -50%);
+                }
             }
         }
     }

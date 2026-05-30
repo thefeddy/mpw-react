@@ -1,4 +1,5 @@
 @use '/app/scss/genres' as *;
+@use 'sass:list';
 
 .genre-badge {
     font-size: 18px;
@@ -31,8 +32,8 @@
 
     @each $name, $colors in $genres {
         &[data-genre='#{$name}'] {
-            background: nth($colors, 1);
-            box-shadow: 5px 5px 0 nth($colors, 2);
+            background: list.nth($colors, 1);
+            box-shadow: 5px 5px 0 list.nth($colors, 2);
 
             @if $name =='comedy' or $name =='animation' or $name =='science-fiction' or $name =='adventure' or $name =='kids' or $name =='talk' {
                 color: #000;

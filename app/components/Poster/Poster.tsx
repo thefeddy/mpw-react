@@ -1,4 +1,5 @@
 /* SCSS */
+import GenreBadges from '../GenreBadges/GenreBadges'
 import './style.scss'
 
 /* Libs */
@@ -6,7 +7,7 @@ import type { JSX } from 'react'
 
 
 export default function Poster(details: any): JSX.Element {
-    //console.log(details);
+    console.log(details);
     return (
         <>
             <div className="panel">
@@ -20,11 +21,9 @@ export default function Poster(details: any): JSX.Element {
                     <span>{details.data.title || details.data.name}<em>({details.data.original_language})</em></span>
                     <div className="info">
                         <em></em>
-                        {details.data.vote_average}
-                        {/* <i>|</i>
-                        <div className="genres">
-                            <p>{details.data.genres.map((genre: any) => genre.name).join(', ')}</p>
-                        </div> */}
+                        {details.data.vote_average.toFixed(1)}
+                        <i>|</i>
+                        {/* <GenreBadges genres={details.data.genre_ids} /> */}
                     </div>
                 </div>
             </div >

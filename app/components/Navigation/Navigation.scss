@@ -15,39 +15,10 @@ nav {
 
     align-items: center;
 
+
     &.sticky {
         position: sticky;
     }
-
-    a {
-        font-size: 14px;
-        font-weight: 500;
-
-        display: block;
-
-        margin-right: 20px;
-        padding: 8px;
-
-        cursor: pointer;
-        text-decoration: none;
-        letter-spacing: 1px;
-
-        color: #fff;
-        border: 1px solid #000;
-        outline: none;
-        background: #e5771e;
-        box-shadow: 5px 5px #bb3f03;
-
-        appearance: none;
-
-        &:active {
-            transform: translate(3px, 3px);
-
-            box-shadow: 2px 2px 0 #000;
-        }
-    }
-
-
 
 
     ul {
@@ -58,17 +29,24 @@ nav {
 
         list-style: none;
 
+        li {
+            margin-right: 10px;
+        }
+
         #login {
+            display: flex;
+
             margin-right: 25px;
             margin-left: auto;
 
-            .user-profile-widget {
-                display: flex;
 
-                .user-name {
-                    background-color: rgb(155, 89, 182);
-                    box-shadow: rgb(125, 60, 152) 5px 5px;
-                }
+            .signout {
+                margin-left: 10px;
+
+                user-select: none;
+
+                background-color: rgb(155, 89, 182);
+                box-shadow: rgb(125, 60, 152) 5px 5px;
             }
         }
 

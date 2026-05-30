@@ -3,24 +3,26 @@ import './Header.scss'
 
 /* Intefaces & */
 import type { HeaderProps } from './types';
-import type { AsideItem } from './interfaces/AsideItem';
+import type { TrackstripItem } from './interfaces/TrackstripItem';
 
 /* Utils */
-import { getGenreColors } from '~/components/GenreBadges/genres';
+
 
 /* React */
 import { type JSX } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
+import TrackStrip from '../TrackStrip/TrackStrip';
 
 export default function Header({ title,
     tagline,
     backgroundImage,
-    asideItems = [],
+    trackstripItems = [],
     className = '',
     children
 }: HeaderProps): JSX.Element {
-    const hasAside = asideItems.length > 0;
+    const hasAside = trackstripItems.length > 0;
+
     return (
         <header className={`ui-header ${className} ${hasAside ? 'has-media' : ''}`}>
             <section style={{ backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined }}>
@@ -31,11 +33,11 @@ export default function Header({ title,
                 </div>
             </section>
             <div className="side">
-                <ul>
-                    {asideItems.map((item) => (
-                        <li
-                            key={item.id}
-                            className={`item ${!item.image ? 'default-background' : ''}`}
+                <TrackStrip orientation="vertical">
+                    {trackstripItems.map((item: TrackstripItem, index: number) => (
+                        <div
+                            key={index}
+                            className={`track ${!item.image ? 'default-background' : ''}`}
                             style={item.image ? { backgroundImage: `url(${item.image})` } : {}}
                         >
                             <Link to={item.linkTo}>
@@ -44,9 +46,9 @@ export default function Header({ title,
                                     <span>{item.subtitle}</span>
                                 </div>
                             </Link>
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </TrackStrip>
             </div>
         </header>
     )

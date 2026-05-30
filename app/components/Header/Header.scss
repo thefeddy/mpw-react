@@ -203,6 +203,10 @@ header {
     }
 
     .side {
+        width: 20%;
+    }
+
+    .scroller {
         display: none;
         overflow-y: scroll;
 
@@ -278,7 +282,7 @@ header {
 
                     span {
                         font-family: 'Space Grotesk', sans-serif;
-                        font-size: 12px;
+                        font-size: 17px;
                         font-weight: 500;
 
                         color: #f9bd6d;

@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 
 import {
     isRouteErrorResponse,
+    Link,
     Links,
     Meta,
     Outlet,
@@ -48,6 +49,13 @@ export const links: Route.LinksFunction = () => [
         href: "https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap",
     },
 ];
+
+
+export function meta() {
+    return [
+        { title: "The Theatre" }, // The global fallback title
+    ];
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -81,11 +89,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </head>
             <body>
                 <UserProvider>
-                    <div id="desktop">
-                        <img src="/img/mpw.png" />
-                        <h1>Mobile is being worked on, sorry for the delay</h1>
-                        <LinesBG />
-                    </div>
                     <Navigation />
                     {children}
                     <ScrollRestoration />
@@ -137,15 +140,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
     return (
         <main id="four-oh-four">
-            <LinesBG />
-
-            <img src="/img/mpw.png" />
             <h1>{message}</h1>
 
             <blockquote className="error-quote" style={{ textAlign: 'center' }}>
                 <p>"{randomQuote.quote}"</p>
-                <footer>— {randomQuote.description}</footer>
+                <span>— {randomQuote.description}</span>
+
             </blockquote>
+            <Link to={`/`} className="btn-bumper">Home</Link>
             {stack && (
                 <pre>
                     <code>{stack}</code>

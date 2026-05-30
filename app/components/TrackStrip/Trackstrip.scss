@@ -1,0 +1,124 @@
+.track-strip {
+    display: flex;
+
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #e5771e;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #bb3f03;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #bb3f03;
+    }
+
+    &.--horizontal {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100%;
+        height: 300px;
+        border-top: 5px solid transparent;
+        border-image: linear-gradient(-45deg,
+                #937650,
+                #f9bd6d,
+                #e6842b,
+                #ce572c,
+                #807c4c,
+                #8c9169) 1;
+
+
+        a {
+            width: 300px;
+
+            .details {
+                min-height: 100px;
+            }
+        }
+    }
+
+    &.--vertical {
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100vh;
+        padding-top: 77px;
+
+        border-left: 5px solid transparent;
+        border-image: linear-gradient(45deg,
+                #937650,
+                #f9bd6d,
+                #e6842b,
+                #ce572c,
+                #807c4c,
+                #8c9169) 1;
+        border-image-slice: 1;
+    }
+
+    .track {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+        justify-content: flex-end;
+
+        a {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            .details {
+                padding: 20px;
+
+                backdrop-filter: blur(10px);
+
+                p {
+                    font-family: 'Archivo', sans-serif;
+                    font-size: 15px;
+                    font-weight: 800;
+
+                    margin: 0 0 4px 0;
+
+                    letter-spacing: 0.5px;
+                    text-transform: uppercase;
+
+                    color: #fffceb;
+
+                    filter: drop-shadow(2px 2px 0px #000);
+                }
+
+                span {
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-size: 17px;
+                    font-weight: 500;
+
+                    color: #f9bd6d;
+                    padding-bottom: 5px;
+
+                    filter: drop-shadow(1px 1px 0px #000);
+                }
+            }
+        }
+
+
+
+        &.default-background {
+            background-color: #26211c;
+            background-image: radial-gradient(circle at 50% 50%, rgba(249, 189, 109, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 20% 20%, rgba(230, 132, 43, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 252, 235, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, #3d342d, #1c1815);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    }
+}

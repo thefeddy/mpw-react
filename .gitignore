@@ -39,3 +39,6 @@ ngrok.exe
 /.react-router/
 /build/
 .backup-code
+
+.env
+.env.local

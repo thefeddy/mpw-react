@@ -1,10 +1,11 @@
-import type { AsideItem } from "./interfaces/AsideItem";
+import type { TrackstripItem } from "./interfaces/TrackstripItem";
 
 export interface HeaderProps {
     title: string;
     tagline?: string;
     backgroundImage: string;
-    asideItems?: AsideItem[];
+    trackstripItems?: TrackstripItem[];
     className?: string; // e.g., 'movie', 'tv', 'cast' for styling hooks
     children?: React.ReactNode;
+    type?: string;
 }
