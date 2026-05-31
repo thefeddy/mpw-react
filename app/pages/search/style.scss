@@ -1,36 +1,84 @@
-.pagination {
-    display: flex;
+#results {
+    padding: 77px 50px 50px 50px;
 
-    margin: 50px 0 0 auto;
-    padding-bottom: 50px;
 
-    justify-content: flex-end;
 
-    a {
-        font-size: 14px;
-        font-weight: 500;
-        font-weight: bold;
+    .list {
+        display: grid;
 
-        margin-right: 10px;
-        margin-right: 20px;
-        padding: 8px;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-        cursor: pointer;
-        transition: box-shadow 550ms ease-in-out;
-        text-decoration: none;
+        panel {
+            max-width: 300px;
+        }
+
+        name {
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    .batman {
+        font-family: 'Courier New', Courier, monospace;
+
+        display: inline-flex;
+
+        margin: 1rem 0;
+
         letter-spacing: 1px;
+        text-transform: uppercase;
 
-        color: #fff;
-        border: none;
-        outline: none;
-        background: #e5771e;
-        box-shadow: 5px 5px #fffceb;
+        color: #1e1b15;
 
-        will-change: box-shadow;
+        align-items: center;
+        gap: 12px;
 
-        &.active,
-        &:hover {
-            box-shadow: 5px 5px #bb3f03;
+
+        .query {
+            font-weight: 800;
+
+            padding: 4px 12px;
+
+            user-select: none;
+            transform: rotate(-1deg);
+
+            border: 2px solid #000;
+            background: #bb3f03;
+            box-shadow: 3px 3px 0 #000;
+        }
+    }
+
+    .search-header-generic {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 1.4rem;
+
+        display: inline-flex;
+
+        margin-bottom: 2.5rem;
+
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        // The "Search Results For:" text
+        .label {
+            font-size: 1.1rem;
+            font-weight: 500;
+
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+
+            color: #4a4238; // Muted deep earth brown for clear, soft contrast 
+        }
+
+        // The dynamic query text
+        .query {
+            font-size: 1.6rem;
+            font-weight: 800;
+            font-style: italic; // Gives the variable query visual separation 
+
+            color: #1a1713; // Crisp, deep charcoal for absolute readability 
         }
     }
 }

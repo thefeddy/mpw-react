@@ -13,38 +13,6 @@ main {
 
     background: #e6d5b7;
 
-    #results {
-        padding: 77px 50px 0 50px;
-
-        h1,
-        h2 {
-            font-size: 24px;
-            font-weight: 500;
-
-            margin-bottom: 10px;
-
-            strong {
-                color: #f79d25;
-            }
-        }
-
-        .list {
-            display: grid;
-
-            grid-gap: 10px;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-            panel {
-                max-width: 300px;
-            }
-
-            name {
-                cursor: pointer;
-                user-select: none;
-            }
-        }
-    }
-
     &#cast-details {
         header {
             section {

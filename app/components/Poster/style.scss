@@ -9,12 +9,31 @@
 
     cursor: pointer;
 
+    border: 1px solid black;
     box-shadow: 5px 5px #807c4c;
 
+    .default-background {
+        height: 100%;
+
+        background-color: #26211c;
+        background-image: radial-gradient(circle at 50% 50%, rgba(249, 189, 109, 0.15) 0%, transparent 60%),
+            radial-gradient(circle at 20% 20%, rgba(230, 132, 43, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 252, 235, 0.08) 0%, transparent 40%),
+            linear-gradient(135deg, #3d342d, #1c1815);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    &:active {
+        transform: translate(3px, 3px);
+
+        box-shadow: 2px 2px 0 #000;
+    }
+
     &:hover {
-        img {
-            transform: scale(1.2);
-        }
+        background: #c74c39;
+        box-shadow: 5px 5px #ff6f61;
     }
 
     img {

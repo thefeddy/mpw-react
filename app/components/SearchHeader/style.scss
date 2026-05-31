@@ -1,0 +1,190 @@
+.retro-search-header {
+    background: #dfcfb1;
+    border: 3px solid #2b1f14;
+    box-shadow: 4px 4px 0px #9e4311;
+    padding: 16px 20px;
+    margin: 3rem 0;
+    position: relative;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #2b1f14;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+
+        .catalog-prefix {
+            color: #5c4e3c;
+        }
+
+        .status-node {
+            color: #9e4311;
+            background: rgba(158, 67, 17, 0.1);
+            padding: 2px 6px;
+            border: 1px solid #9e4311;
+        }
+    }
+
+    &__query {
+        font-family: 'Arial Black', 'Impact', sans-serif;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #2b1f14;
+        margin: 0;
+        letter-spacing: -1px;
+        text-transform: lowercase;
+    }
+
+    &.--theme-70s-starwars {
+        background: #252321; // Dark matte titanium control panel
+        border-color: #11100f;
+        box-shadow: 4px 4px 0px #d4a31b; // Hard geometric blast-yellow shadow
+
+        .retro-search-header__meta {
+            border-bottom-color: #d4a31b;
+
+            .catalog-prefix {
+                color: #8c867a; // Industrial gunmetal gray
+            }
+
+            .status-node {
+                color: #d4a31b;
+                border-color: #d4a31b;
+                background: rgba(212, 163, 27, 0.08);
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            word-spacing: 4px;
+            text-shadow: 2px 2px 0px #11100f;
+        }
+    }
+
+    &.--theme-70s-light {
+        background: #f7f3e9;
+        border-color: #2b1f14;
+        box-shadow: 4px 4px 0px #e09622;
+
+        drop .retro-search-header__meta {
+            border-bottom-color: #e09622;
+
+            .catalog-prefix {
+                color: #8a7c6a;
+            }
+
+            .status-node {
+                color: #2b1f14;
+                border-color: #2b1f14;
+                background: #e09622; // Solid yellow block badge look
+                padding: 1px 6px;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #cc4425; // Bold 70s tomato orange text
+            font-family: 'Arial Black', sans-serif;
+            text-transform: lowercase; // Classic vintage book layout look
+            letter-spacing: -1.5px;
+        }
+    }
+
+    &.--theme-70s-spaceballs {
+        background: #000000; // Total darkness grid space
+        border: 3px double #ff5500; // Double-strike neon warning lines
+        box-shadow: 5px 5px 0px #3300ff; // Neon blue projection shadow
+
+        .retro-search-header__meta {
+            border-bottom: 2px dashed #ff5500;
+
+            // Funny physical prop text injection via CSS
+            .catalog-prefix::before {
+                content: "STATUS: LUDICROUS_SPEED // ";
+                color: #ff5500;
+            }
+
+            .catalog-prefix {
+                color: #ffffff;
+                font-family: monospace;
+            }
+
+            .status-node {
+                color: #00ff66; // Bright radar terminal green
+                border-color: #00ff66;
+                background: transparent;
+                animation: dashboard-blink 1s steps(2, start) infinite;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffcc00; // Giant cinematic space comedy yellow
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            font-style: italic; // Leans heavily down the display track
+            letter-spacing: 1px;
+            filter: drop-shadow(3px 3px 0px #ff5500);
+        }
+    }
+
+    &.--theme-70s-dark {
+        background: #1c1510;
+        border-color: #000000;
+        box-shadow: 4px 4px 0px #ce572c;
+
+        .retro-search-header__meta {
+            border-bottom-color: #ce572c;
+
+            .catalog-prefix {
+                color: #8c9169;
+            }
+
+            .status-node {
+                color: #ce572c;
+                border-color: #ce572c;
+                background: transparent;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ebdcb9;
+            text-transform: uppercase;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 2px;
+        }
+    }
+
+    &.--theme-70s-space {
+        background: #e66b2e;
+        border-color: #2b1f14;
+        box-shadow: 4px 4px 0px #2b1f14;
+
+        .retro-search-header__meta {
+            border-bottom-style: dashed;
+            border-bottom-color: #2b1f14;
+
+            .catalog-prefix,
+            .status-node {
+                color: #2b1f14;
+                border-color: #2b1f14;
+                background: transparent;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: system-ui, sans-serif;
+            font-style: italic;
+        }
+    }
+}

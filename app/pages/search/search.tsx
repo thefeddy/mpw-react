@@ -14,38 +14,53 @@ import type { SearchScreenProps, Item } from '~/interfaces/SearchScreen.interfac
 /* React */
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { PaginationControl } from '~/components/Pagination/Pagination';
+import { SearchHeader } from '~/components/SearchHeader/SearchHeader';
 
 
 export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page }) => {
     const pageNumber = parseInt(page, 10) || 1;
-    const [results, setResults] = useState<Item[]>([]);
-    const [totalResults, setTotalResults] = useState(0);
-    const [totalPages, setTotalPages] = useState(0);
+    const ITEMS_PER_PAGE = 20; // TMDB's strict default size
 
+    const [results, setResults] = useState<Item[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [pagination, setPagination] = useState({
+        pages: 0,
+        current: 1,
+        results: 0
+    });
 
     useEffect(() => {
+        const controller = new AbortController();
+
         const fetchResults = async () => {
+            setLoading(true);
             try {
                 const data = await api.searchTV(type, query, pageNumber);
-                if (data && data.results) {
+
+                if (!controller.signal.aborted && data && data.results) {
                     setResults(data.results);
-                    setTotalResults(data.results.length);
-                    setTotalPages(data.pagination.total)
+                    setPagination(data.pagination);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch (error) {
-                console.error("Error fetching results:", error);
+                if (!controller.signal.aborted) console.error(error);
+            } finally {
+                if (!controller.signal.aborted) setLoading(false);
             }
         };
 
         fetchResults();
-    }, [type, query, page]);
+        return () => controller.abort();
+    }, [type, query, pageNumber]);
 
     return (
         <main>
-            <LinesBG />
+
             <section id="results">
-                <h1>Search results for: <strong>{query}</strong></h1>
-                <h2>Total Results: <strong>{totalResults}</strong></h2>
+                <SearchHeader query={query} />
+
+
 
                 <div className="list">
                     {results.length > 0 ? (
@@ -58,19 +73,8 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page })
                         <p>No results found</p>
                     )}
                 </div>
-                {totalPages}
-                {totalPages > 1 && (
-                    <div className="pagination">
-                        {[...Array(totalPages)].map((_, index) => (
-                            <NavLink
-                                key={index}
-                                to={`/search/${type}/${query}/${index + 1}`}
-                                className={({ isActive }) => (isActive ? 'active' : '')}
-                            >
-                                {index + 1}
-                            </NavLink>
-                        ))}
-                    </div>
+                {pagination.pages > 1 && (
+                    <PaginationControl pagination={pagination} itemsPerPage={ITEMS_PER_PAGE} />
                 )}
             </section>
         </main>
