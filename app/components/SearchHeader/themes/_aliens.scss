@@ -1,0 +1,50 @@
+@mixin theme {
+    &.--theme-70s-alien {
+        background: #030708;
+        border: 2px solid #2d3830;
+        box-shadow: 4px 4px 0px #0d1210;
+
+        .retro-search-header__meta {
+            border-bottom-color: #2d3830;
+
+            .catalog-prefix {
+                color: #506355;
+                letter-spacing: 3px;
+            }
+
+            .status-node {
+                color: #00ff66;
+                border-color: #2d3830;
+                background: transparent;
+                opacity: 0.6;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 200;
+            text-transform: uppercase;
+            letter-spacing: 18px;
+            padding-left: 18px;
+            text-align: center;
+            animation: alien-isolate 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        }
+    }
+
+    @keyframes alien-isolate {
+
+        0%,
+        100% {
+            letter-spacing: 18px;
+            opacity: 0.8;
+            filter: blur(0.5px);
+        }
+
+        50% {
+            letter-spacing: 24px;
+            opacity: 1;
+            filter: blur(0);
+        }
+    }
+}

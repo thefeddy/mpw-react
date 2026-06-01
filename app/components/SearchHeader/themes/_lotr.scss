@@ -1,0 +1,29 @@
+@mixin theme {
+    &.--theme-70s-lotr {
+        background: #f0e2ca;
+        border: 3px solid #362915;
+        box-shadow: 4px 4px 0px #bfa15e;
+
+        .retro-search-header__meta {
+            border-bottom: 2px double #362915;
+
+            .catalog-prefix {
+                color: #705b39;
+            }
+
+            .status-node {
+                color: #362915;
+                border-color: #362915;
+                background: #bfa15e;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #362915;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -0.5px;
+        }
+    }
+}

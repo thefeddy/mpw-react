@@ -1,0 +1,38 @@
+@mixin theme {
+    &.--theme-70s-spaceballs {
+        background: #000000;
+        border: 3px double #ff5500;
+        box-shadow: 5px 5px 0px #3300ff;
+
+        .retro-search-header__meta {
+            border-bottom: 2px dashed #ff5500;
+
+
+            .catalog-prefix::before {
+                content: "STATUS: LUDICROUS_SPEED // ";
+                color: #ff5500;
+            }
+
+            .catalog-prefix {
+                color: #ffffff;
+                font-family: monospace;
+            }
+
+            .status-node {
+                color: #00ff66;
+                border-color: #00ff66;
+                background: transparent;
+                animation: dashboard-blink 1s steps(2, start) infinite;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffcc00;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: 1px;
+            filter: drop-shadow(3px 3px 0px #ff5500);
+        }
+    }
+}

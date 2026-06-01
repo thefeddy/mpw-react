@@ -1,0 +1,29 @@
+@mixin theme {
+    &.--theme-70s-fightclub {
+        background: #ff8cb3;
+        border: 3px solid #1f1116;
+        box-shadow: 4px 4px 0px #1f1116;
+
+        .retro-search-header__meta {
+            border-bottom-color: #1f1116;
+
+            .catalog-prefix {
+                color: #1f1116;
+            }
+
+            .status-node {
+                color: #ffffff;
+                border-color: #1f1116;
+                background: #1f1116;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: 'Impact', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px #1f1116;
+        }
+    }
+}

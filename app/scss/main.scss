@@ -12,6 +12,8 @@ main {
     min-height: 100vh;
 
     background: #e6d5b7;
+    background-image: radial-gradient(#d4c09c 1px, transparent 1px);
+    background-size: 12px 12px;
 
     &#cast-details {
         header {
@@ -57,5 +59,90 @@ main {
     &:hover {
         background: #c74c39;
         box-shadow: 5px 5px #ff6f61;
+    }
+}
+
+#results {
+    padding: 77px 50px 50px 50px;
+
+
+
+    .list {
+        display: grid;
+
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+        panel {
+            max-width: 300px;
+        }
+
+        name {
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    .batman {
+        font-family: 'Courier New', Courier, monospace;
+
+        display: inline-flex;
+
+        margin: 1rem 0;
+
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        color: #1e1b15;
+
+        align-items: center;
+        gap: 12px;
+
+
+        .query {
+            font-weight: 800;
+
+            padding: 4px 12px;
+
+            user-select: none;
+            transform: rotate(-1deg);
+
+            border: 2px solid #000;
+            background: #bb3f03;
+            box-shadow: 3px 3px 0 #000;
+        }
+    }
+
+    .search-header-generic {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 1.4rem;
+
+        display: inline-flex;
+
+        margin-bottom: 2.5rem;
+
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+
+
+        .label {
+            font-size: 1.1rem;
+            font-weight: 500;
+
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+
+            color: #4a4238;
+        }
+
+
+        .query {
+            font-size: 1.6rem;
+            font-weight: 800;
+            font-style: italic;
+
+            color: #1a1713;
+        }
     }
 }

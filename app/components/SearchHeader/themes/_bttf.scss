@@ -1,0 +1,62 @@
+@mixin theme {
+    &.--theme-70s-bttf {
+        background: #0f111a;
+        border: 3px solid #00f0ff;
+        box-shadow: 4px 4px 0px #ff0055;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(255, 0, 85, 0.1) 0%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .retro-search-header__meta {
+            border-bottom: 2px dashed #ffaa00;
+            position: relative;
+            z-index: 2;
+
+            .catalog-prefix {
+                color: #00f0ff;
+                font-family: monospace;
+            }
+
+            .status-node {
+                color: #ffaa00;
+                border-color: #ffaa00;
+                background: transparent;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffaa00;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: 0px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(2px 2px 0px #ff0055);
+            animation: bttf-flux 0.2s ease-in-out infinite alternate;
+        }
+    }
+
+
+    @keyframes bttf-flux {
+        0% {
+            filter: drop-shadow(2px 2px 0px #ff0055) brightness(1);
+        }
+
+        100% {
+            filter: drop-shadow(2px 2px 2px #ff0055) brightness(1.2);
+        }
+    }
+
+}

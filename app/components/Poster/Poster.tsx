@@ -17,7 +17,7 @@ export default function Poster(details: any): JSX.Element {
                 <div className="name">
                     <span>{details.data.title || details.data.name}<em>({details.data.original_language})</em></span>
                     <div className="info">
-                        {details.data.vote_average.toFixed(1)}
+                        {details?.data?.vote_average?.toFixed(1)}
                     </div>
                 </div>
             </div >

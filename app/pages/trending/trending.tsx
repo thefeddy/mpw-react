@@ -16,6 +16,7 @@ import type { Item } from '~/interfaces/SearchScreen.interface';
 /* React */
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { SearchHeader } from '~/components/SearchHeader/SearchHeader';
 
 export function TrendingScreen() {
     const [results, setResults] = useState<Item[]>([]);
@@ -40,6 +41,7 @@ export function TrendingScreen() {
     return (
         <main>
             <section id="results" className="trending">
+                <SearchHeader query={'Trending'} />
                 <div className="list">
                     {results.length > 0 ? (
                         results.map((item) => (

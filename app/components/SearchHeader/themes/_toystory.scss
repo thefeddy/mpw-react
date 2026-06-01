@@ -1,0 +1,30 @@
+@mixin theme {
+    &.--theme-70s-toystory {
+        background: #5ba3e3;
+        border: 3px solid #e03424;
+        box-shadow: 4px 4px 0px #fce138;
+
+        .retro-search-header__meta {
+            border-bottom-color: #e03424;
+
+            .catalog-prefix {
+                color: #ffffff;
+                font-weight: 800;
+            }
+
+            .status-node {
+                color: #ffffff;
+                border-color: #ffffff;
+                background: #e03424;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            text-shadow: 3px 3px 0px #e03424;
+        }
+    }
+}

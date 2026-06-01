@@ -1,0 +1,44 @@
+@mixin theme {
+    &.--theme-70s-indy {
+        background: #ecdcb9;
+        border: 4px solid #4a2f13;
+        box-shadow: 4px 4px 0px #b83d00;
+
+        .retro-search-header__meta {
+            border-bottom: 2px solid #4a2f13;
+
+            .catalog-prefix {
+                color: #785834;
+            }
+
+            .status-node {
+                color: #ffffff;
+                border-color: #4a2f13;
+                background: #4a2f13;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #d97900;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            filter: drop-shadow(2px 2px 0px #4a2f13);
+            animation: indy-heat 4s ease-in-out infinite alternate;
+        }
+    }
+
+    @keyframes indy-heat {
+        0% {
+            color: #d97900;
+        }
+
+        50% {
+            color: #e69500;
+        }
+
+        100% {
+            color: #cc5200;
+        }
+    }
+}

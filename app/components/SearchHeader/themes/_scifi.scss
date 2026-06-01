@@ -1,0 +1,25 @@
+@mixin theme {
+    &.--theme-70s-space {
+        background: #e66b2e;
+        border-color: #2b1f14;
+        box-shadow: 4px 4px 0px #2b1f14;
+
+        .retro-search-header__meta {
+            border-bottom-style: dashed;
+            border-bottom-color: #2b1f14;
+
+            .catalog-prefix,
+            .status-node {
+                color: #2b1f14;
+                border-color: #2b1f14;
+                background: transparent;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: system-ui, sans-serif;
+            font-style: italic;
+        }
+    }
+}

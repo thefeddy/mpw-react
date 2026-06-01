@@ -1,0 +1,63 @@
+@mixin theme {
+    &.--theme-70s-transformers {
+        background: #0d1117;
+        border: 3px solid #ff003c;
+        box-shadow: 4px 4px 0px #7b2cbf;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: 8px 8px;
+            background-image: linear-gradient(to right, rgba(255, 0, 60, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 0, 60, 0.05) 1px, transparent 1px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .retro-search-header__meta {
+            border-bottom: 2px dashed #7b2cbf;
+            position: relative;
+            z-index: 2;
+
+            .catalog-prefix {
+                color: #00f0ff;
+                font-family: monospace;
+                letter-spacing: 2px;
+            }
+
+            .status-node {
+                color: #ffffff;
+                border-color: #ff003c;
+                background: #ff003c;
+                box-shadow: 0 0 8px #ff003c;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(2px 2px 0px #ff003c) drop-shadow(-1px -1px 0px #7b2cbf);
+            animation: energon-surge 2.5s ease-in-out infinite alternate;
+        }
+    }
+
+    @keyframes energon-surge {
+        0% {
+            filter: drop-shadow(2px 2px 0px #ff003c) drop-shadow(-1px -1px 0px #7b2cbf) brightness(1);
+        }
+
+        100% {
+            filter: drop-shadow(3px 3px 2px #ff003c) drop-shadow(-1px -1px 0px #00f0ff) brightness(1.2);
+        }
+    }
+}

@@ -1,0 +1,29 @@
+@mixin theme {
+    &.--theme-70s-shawshank {
+        background: #cfc2a9;
+        border: 2px solid #423b30;
+        box-shadow: 3px 3px 0px #423b30;
+
+        .retro-search-header__meta {
+            border-bottom-color: #423b30;
+
+            .catalog-prefix {
+                color: #5e5445;
+            }
+
+            .status-node {
+                color: #423b30;
+                border-color: #423b30;
+                background: transparent;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #2b251e;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+    }
+
+}

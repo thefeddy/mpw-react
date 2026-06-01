@@ -1,0 +1,98 @@
+// Themes
+@use './themes/trending';
+
+
+// Genres
+@use './themes/scifi';
+
+// Movie Based
+@use './themes/batman';
+@use './themes/superman';
+@use './themes/transformers';
+@use './themes/starwars';
+@use './themes/spaceballs';
+@use './themes/pulpfiction';
+@use './themes/diehard';
+@use './themes/godfather';
+@use './themes/goodfellas';
+@use './themes/shawshank';
+@use './themes/lotr';
+@use './themes/fightclub';
+@use './themes/matrix';
+@use './themes/toystory';
+@use './themes/bttf';
+@use './themes/aliens';
+@use './themes/tmnt';
+@use './themes/indy';
+
+.retro-search-header {
+    background: #dfcfb1;
+    border: 3px solid #2b1f14;
+    box-shadow: 4px 4px 0px #9e4311;
+    padding: 16px 20px;
+    margin: 3rem 0;
+    position: relative;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #2b1f14;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+
+        .catalog-prefix {
+            color: #5c4e3c;
+        }
+
+        .status-node {
+            color: #9e4311;
+            background: rgba(158, 67, 17, 0.1);
+            padding: 2px 6px;
+            border: 1px solid #9e4311;
+        }
+    }
+
+    &__query {
+        font-family: 'Arial Black', 'Impact', sans-serif;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #2b1f14;
+        margin: 0;
+        letter-spacing: -1px;
+        text-transform: lowercase;
+    }
+
+
+    @include superman.theme;
+    @include batman.theme;
+
+    @include trending.theme;
+
+    // Genres
+    @include scifi.theme; // I think there's 24 genres do this all later : |
+
+    // Movie Based
+    @include transformers.theme;
+    @include starwars.theme;
+    @include spaceballs.theme;
+    @include pulpfiction.theme;
+    @include diehard.theme;
+    @include godfather.theme;
+    @include goodfellas.theme;
+    @include shawshank.theme;
+    @include lotr.theme;
+    @include fightclub.theme;
+    @include matrix.theme;
+    @include toystory.theme;
+    @include bttf.theme;
+    @include aliens.theme;
+    @include tmnt.theme;
+    @include indy.theme;
+}

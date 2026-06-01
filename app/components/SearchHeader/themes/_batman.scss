@@ -1,0 +1,28 @@
+@mixin theme {
+    &.--theme-70s-batman {
+        background: #1c1510;
+        border-color: #000000;
+        box-shadow: 4px 4px 0px #ce572c;
+
+        .retro-search-header__meta {
+            border-bottom-color: #ce572c;
+
+            .catalog-prefix {
+                color: #8c9169;
+            }
+
+            .status-node {
+                color: #ce572c;
+                border-color: #ce572c;
+                background: transparent;
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ebdcb9;
+            text-transform: uppercase;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 2px;
+        }
+    }
+}

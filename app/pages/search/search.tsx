@@ -60,8 +60,6 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({ type, query, page })
             <section id="results">
                 <SearchHeader query={query} />
 
-
-
                 <div className="list">
                     {results.length > 0 ? (
                         results.map((item) => (

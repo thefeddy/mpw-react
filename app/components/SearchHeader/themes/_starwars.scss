@@ -1,0 +1,32 @@
+@mixin theme {
+
+    &.--theme-70s-starwars {
+        background: #252321;
+        border-color: #11100f;
+        box-shadow: 4px 4px 0px #d4a31b;
+
+        .retro-search-header__meta {
+            border-bottom-color: #d4a31b;
+
+            .catalog-prefix {
+                color: #8c867a;
+            }
+
+            .status-node {
+                color: #d4a31b;
+                border-color: #d4a31b;
+                background: rgba(212, 163, 27, 0.08);
+            }
+        }
+
+        .retro-search-header__query {
+            color: #ffffff;
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            word-spacing: 4px;
+            text-shadow: 2px 2px 0px #11100f;
+        }
+    }
+}
