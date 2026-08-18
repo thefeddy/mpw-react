@@ -11,32 +11,36 @@ import TrackStrip from '~/components/TrackStrip/TrackStrip';
 import api from '~/services/api';
 
 /* Interfaces */
-import type { DetailScreenProps, MediaDetail } from '~/types/media';
-import type { StreamBuyRent } from '~/interfaces/StreamBuyRent.inteface';
-import { createDefaultMediaDetails } from '~/constants/defaults/media';
+import type { DetailScreenProps } from '~/types/media';
+
 import type { TrackstripItem } from '~/components/Header/interfaces/TrackstripItem';
 
 /* React */
 import { useState, useEffect } from 'react';
 import { data, Link } from 'react-router-dom';
 
-
+/* Zod */
+import { type DetailsResponse, } from '~/schemas/media.schema';
 
 
 export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id, onDataLoaded }) => {
 
-    const [details, setDetails] = useState<MediaDetail>(createDefaultMediaDetails());
+    const [details, setDetails] = useState<DetailsResponse>();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchResults = async () => {
             try {
-                const data: MediaDetail = await api.getDetails(type, id);
-                if (data && data.details) {
-                    console.log(data.details)
-                    setDetails(data.details);
-                    const mediaTitle = data.details.title || data.details.original_name;
+                const data = await api.getDetails(type, id);
+                console.log(data)
+                if (data) {
+                    const mediaTitle = data.title || data.original_name;
+                    console.log(type)
+                    data.type = 'tv';
+
+                    setDetails(data);
                     onDataLoaded(mediaTitle);
+
                 }
             } catch (error) {
                 console.error("Error fetching results:", error);
@@ -47,7 +51,6 @@ export const DetailScreen: React.FC<DetailScreenProps> = ({ type, id, onDataLoad
 
         fetchResults();
     }, [type, id]);
-
 
     const castList = details?.credits?.cast ?? [];
     const seasonsList = details?.seasons ?? [];

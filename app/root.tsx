@@ -145,7 +145,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
             <blockquote className="error-quote" style={{ textAlign: 'center' }}>
                 <p>"{randomQuote.quote}"</p>
                 <span>— {randomQuote.description}</span>
-
             </blockquote>
             <Link to={`/`} className="btn-bumper">Home</Link>
             {stack && (

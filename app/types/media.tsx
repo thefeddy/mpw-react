@@ -153,3 +153,32 @@ export interface MediaDetail {
     original_name: string;
     name: string;
 }
+
+
+export interface MediaDetail {
+
+
+
+    homepage: string;
+    images: ImageSet;
+
+
+    production_companies: ProductionCompany[];
+    production_countries: ProductionCountry[];
+    release_date: string;
+    revenue: number;
+    runtime: number;
+    spoken_languages: SpokenLanguage[];
+    status: string;
+    streams: Record<string, Stream>;
+    tagline: string;
+    title: string;
+    trailers: Trailer | null;
+    video: boolean;
+    videos: VideoSet;
+    vote_average: number;
+    vote_count: number;
+    seasons: Season[];
+    original_name: string;
+    name: string;
+}

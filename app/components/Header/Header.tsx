@@ -31,6 +31,9 @@ export default function Header({ title,
                     {tagline && (<h2>{tagline}</h2>)}
                     {children}
                 </div>
+                <div className="biography">
+
+                </div>
             </section>
             <div className="side">
                 <TrackStrip orientation="vertical">

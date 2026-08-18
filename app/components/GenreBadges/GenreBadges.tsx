@@ -13,7 +13,7 @@ interface GenreBadgesProps {
 
 export default function GenreBadges({ genres = [] }: GenreBadgesProps) {
     if (!genres.length) return null;
-
+    console.log(genres)
     return (
         <div className="genre-badges-container">
             {genres.map((genre) => {

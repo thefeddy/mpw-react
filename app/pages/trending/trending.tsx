@@ -3,35 +3,36 @@
 import './style.scss'
 
 /* Components */
-import LinesBG from '~/components/LinesBG/LinesBG';
 import Poster from '~/components/Poster/Poster';
-
 
 /* Services */
 import api from '../../services/api';
-
-/* Interfaces */
-import type { Item } from '~/interfaces/SearchScreen.interface';
 
 /* React */
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { SearchHeader } from '~/components/SearchHeader/SearchHeader';
 
+/* Zod */
+import { type MediaItem } from '~/schemas/media.schema';
+
 export function TrendingScreen() {
-    const [results, setResults] = useState<Item[]>([]);
+    const [results, setResults] = useState<MediaItem[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchResults = async () => {
             try {
                 const data = await api.getTrending();
-                if (data && data.results) {
-
+                if (data) {
                     setResults(data.results);
-
+                } else {
+                    setResults([]);
                 }
             } catch (error) {
                 console.error("Error fetching results:", error);
+            } finally {
+                setIsLoading(false);
             }
         };
 

@@ -1,8 +1,16 @@
 import type { UserCreate } from '~/interfaces/UserContext.interface';
 
+/* Zod */
+import { z } from 'zod';
+import { TrendingResponseSchema, PaginatedResultsSchema, DetailsResponseSchema } from '~/schemas/media.schema';
+
+
 const API_URL = 'http://localhost:3000/api';
 
-async function request<T = any>(endpoint: string, options: RequestInit = {}): Promise<T | null> {
+async function request<T = any>(
+    endpoint: string,
+    options: RequestInit = {},
+    schema?: z.ZodType<T>): Promise<T | null> {
     const url = `${API_URL}${endpoint}`;
 
     const headers = new Headers(options.headers);
@@ -15,7 +23,6 @@ async function request<T = any>(endpoint: string, options: RequestInit = {}): Pr
     if (token && !headers.has('Authorization')) {
         headers.set('Authorization', `Bearer ${token}`);
     }
-
     try {
         const response = await fetch(url, { ...options, headers });
 
@@ -23,7 +30,22 @@ async function request<T = any>(endpoint: string, options: RequestInit = {}): Pr
             throw new Error(`HTTP Error Status: ${response.status}`);
         }
 
-        return await response.json() as T;
+        const rawData = await response.json();
+
+        if (schema) {
+            const parseResult = schema.safeParse(rawData);
+
+            if (!parseResult.success) {
+                console.error(
+                    `[API Schema Validation Error] Endpoint: ${endpoint}`,
+                    z.treeifyError(parseResult.error)
+                );
+                return null;
+            }
+
+            return parseResult.data;
+        }
+        return rawData as T;
     } catch (error) {
         console.error(`[API Transport Error] Failed target: ${endpoint}`, error);
         return null;
@@ -32,19 +54,19 @@ async function request<T = any>(endpoint: string, options: RequestInit = {}): Pr
 
 const api = {
     searchTV: (type: string, query: string, page: number) =>
-        request(`/search/${type}/${encodeURIComponent(query)}/${page}`),
+        request(`/search/${type}/${encodeURIComponent(query)}/${page}`, {}, PaginatedResultsSchema),
 
     getGenres: () =>
         request('/media/genres/'),
 
     getDetails: (type: string, id: string) =>
-        request(`/library/details/${type}/${id}/`),
+        request(`/library/details/${type}/${id}/`, {}, DetailsResponseSchema),
 
     getSeasonDetails: (id: number, season: number) =>
         request(`/media/season/${id}/${season}/`),
 
     getTrending: () =>
-        request('/library/trending/'),
+        request('/library/trending/', {}, TrendingResponseSchema),
 
     getCast: (id: number) =>
         request(`/library/cast/${id}`),
